@@ -4,6 +4,15 @@ import express from 'express';
 import pg from 'pg';
 import { ClientError, errorMiddleware } from './lib/index.js';
 
+type Product = {
+  name: string;
+  price: string;
+  brand: string;
+  details: string;
+  imageUrl: string;
+  size: string;
+};
+
 const connectionString =
   process.env.DATABASE_URL ||
   `postgresql://${process.env.RDS_USERNAME}:${process.env.RDS_PASSWORD}@${process.env.RDS_HOSTNAME}:${process.env.RDS_PORT}/${process.env.RDS_DB_NAME}`;
@@ -25,8 +34,22 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello, World!' });
+app.get('/api/products', async (req, res, next) => {
+  try {
+    const sql = `
+      select "productId",
+            "name",
+            "price",
+            "imageUrl",
+            "details",
+            "brand"
+        from "products"
+    `;
+    const result = await db.query<Product>(sql);
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
 });
 
 /**

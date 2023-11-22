@@ -1,11 +1,12 @@
-import Header from './Header';
 import HeaderPics from './HeaderPics';
+import ShoeDisplay from './ShoeDisplay';
 
 export default function Homepage() {
+  console.log('Hompage');
   return (
     <>
-      <Header />
       <HeaderPics />
+      <ShoeDisplay text="Featured" />
     </>
   );
 }

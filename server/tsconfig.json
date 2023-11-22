@@ -18,5 +18,5 @@
     "resolveJsonModule": true,
     "noEmit": true
   },
-  "include": ["."]
+  "include": [".", "../client/src/api.ts"]
 }
