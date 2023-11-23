@@ -1,12 +1,16 @@
+import { Catalog } from '../pages/Catalog';
 import HeaderPics from './HeaderPics';
-import ShoeDisplay from './ShoeDisplay';
 
-export default function Homepage() {
+type Props = {
+  search: string;
+};
+
+export default function Homepage({ search }: Props) {
   console.log('Hompage');
   return (
     <>
       <HeaderPics />
-      <ShoeDisplay text="Featured" />
+      <Catalog text="Featured" featured={true} search={search} />
     </>
   );
 }

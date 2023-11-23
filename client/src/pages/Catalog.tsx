@@ -4,17 +4,21 @@ import { Link } from 'react-router-dom';
 
 type Props = {
   text: string;
+  categoryId?: number;
+  search: string;
+  featured?: boolean;
 };
 
-export function Catalog({ text }: Props) {
+export function Catalog({ text, categoryId, search, featured }: Props) {
   const [products, setProducts] = useState<Product[]>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<unknown>();
-
+  console.log('search:', search);
   useEffect(() => {
     async function fetchData() {
+      const url = featured ? '/api/featured' : `/api/products/${categoryId}`;
       try {
-        const resp = await fetch('/api/products');
+        const resp = await fetch(url);
         if (!resp.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -27,9 +31,9 @@ export function Catalog({ text }: Props) {
       }
     }
     fetchData();
-  }, []);
+  }, [categoryId, featured]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading || !products) return <div>Loading...</div>;
   if (error)
     return (
       <div>
@@ -37,12 +41,18 @@ export function Catalog({ text }: Props) {
         {error instanceof Error ? error.message : 'Unknown Error'}
       </div>
     );
+  const categoryProducts = products.filter(
+    (product) => product.categoryId === categoryId
+  );
+  const displayProducts = categoryProducts.filter((product) =>
+    product.brand.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+  );
   return (
     <div className="container">
       <h1>{text}</h1>
       <hr />
       <div className="row">
-        {products?.map((product) => (
+        {displayProducts?.map((product) => (
           <div key={product.productId} className="col-12 col-md-6 col-lg-4">
             <ProductCard product={product} />
           </div>
@@ -55,7 +65,7 @@ export function Catalog({ text }: Props) {
 type CardProps = {
   product: Product;
 };
-function ProductCard({ product }: CardProps) {
+export function ProductCard({ product }: CardProps) {
   const { name, price, brand, imageUrl, productId } = product;
   return (
     <Link
