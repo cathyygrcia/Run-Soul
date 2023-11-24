@@ -14,11 +14,11 @@ CREATE TABLE "orderDetails" (
 );
 
 CREATE TABLE "products" (
-  "productId" int PRIMARY KEY,
+  "productId" serial PRIMARY KEY,
   "name" text,
   "brand" text,
   "price" int,
-  "size" int,
+  "size" text,
   "details" text,
   "imageUrl" text,
   "categoryId" int

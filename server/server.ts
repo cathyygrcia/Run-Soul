@@ -4,6 +4,15 @@ import express from 'express';
 import pg from 'pg';
 import { ClientError, errorMiddleware } from './lib/index.js';
 
+type Product = {
+  name: string;
+  price: string;
+  brand: string;
+  details: string;
+  imageUrl: string;
+  size: string;
+};
+
 const connectionString =
   process.env.DATABASE_URL ||
   `postgresql://${process.env.RDS_USERNAME}:${process.env.RDS_PASSWORD}@${process.env.RDS_HOSTNAME}:${process.env.RDS_PORT}/${process.env.RDS_DB_NAME}`;
@@ -25,8 +34,72 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello, World!' });
+app.get('/api/products', async (req, res, next) => {
+  try {
+    const sql = `
+      select "productId",
+            "name",
+            "price",
+            "imageUrl",
+            "details",
+            "brand"
+        from "products"
+    `;
+    const result = await db.query<Product>(sql);
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/featured', async (req, res, next) => {
+  try {
+    const sql = `
+      select "productId",
+            "name",
+            "price",
+            "imageUrl",
+            "details",
+            "brand"
+        from "products"
+    `;
+    const result = await db.query<Product>(sql);
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/products/:categoryId', async (req, res, next) => {
+  try {
+    const categoryId = Number(req.params.categoryId);
+    if (!categoryId) {
+      throw new ClientError(400, 'categoryId must be a positive integer');
+    }
+    const sql = `
+      select
+      "categoryId",
+            "name",
+            "price",
+            "imageUrl",
+            "details",
+            "brand",
+            "productId"
+        from "products"
+        where "categoryId" = $1
+    `;
+    const params = [categoryId];
+    const result = await db.query<Product>(sql, params);
+    if (!result.rows) {
+      throw new ClientError(
+        404,
+        `cannot find product with categoryId ${categoryId}`
+      );
+    }
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
 });
 
 /**

@@ -1,35 +1,39 @@
-import { useEffect, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import Homepage from './components/Homepage';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+
+import { Catalog } from './pages/Catalog';
+import { useState } from 'react';
 
 export default function App() {
-  const [serverData, setServerData] = useState('');
-
-  useEffect(() => {
-    async function readServerData() {
-      const resp = await fetch('/api/hello');
-      const data = await resp.json();
-
-      console.log('Data from server:', data);
-
-      setServerData(data.message);
-    }
-
-    readServerData();
-  }, []);
+  const [search, setSearch] = useState('');
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>{serverData}</h1>
+      <Routes>
+        <Route path="/" element={<Header onSearch={setSearch} />}>
+          <Route index element={<Homepage search={search} />} />
+          <Route
+            path="womens"
+            element={
+              <Catalog text="Womens Shoes" categoryId={2} search={search} />
+            }
+          />
+          <Route
+            path="mens"
+            element={
+              <Catalog text="Mens Shoes" categoryId={1} search={search} />
+            }
+          />
+          <Route
+            path="kids"
+            element={
+              <Catalog text="Kids Shoes" categoryId={3} search={search} />
+            }
+          />
+        </Route>
+      </Routes>
     </>
   );
 }
