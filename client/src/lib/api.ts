@@ -24,7 +24,7 @@ export async function fetchCatalog(): Promise<Product[]> {
  * @returns Promise that resolves to the product.
  */
 export async function fetchProduct(productId: number): Promise<Product> {
-  const res = await fetch(`/api/products/${productId}`);
+  const res = await fetch(`/api/productdetails/${productId}`);
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
   return await res.json();
 }
