@@ -28,7 +28,12 @@ export function ProductDetails() {
     }
   }, [productId]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="loading">
+        <h1 className="white text-4xl">Loading....</h1>
+      </div>
+    );
   if (error)
     return (
       <div>
@@ -42,7 +47,7 @@ export function ProductDetails() {
     <>
       <Link to="/">
         {/* TODO: Instead of a div, the above should link to `/` */}
-        <button className="back-button"> &lt; Back to catalog</button>
+        <button className="back-button white"> &lt; Back</button>
       </Link>
       <div className="flex justify-center">
         <div className="image-container">

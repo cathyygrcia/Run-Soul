@@ -137,7 +137,7 @@ insert into "products" (
   these shoes will help get you there.
   Breathable on top and bouncy on bottom, the lightweight design flexes with your foot so you comfortably cut, corner and spring into action when it' || E's time to play.',
   '/images/kidsnike1.png',
-  'false',
+  'true',
   3
 ),
 (
@@ -222,6 +222,19 @@ insert into "products" (
   '/images/on1.png',
   'true',
   2
+),
+(
+  'Speedgoat',
+  'Hoka',
+  155,
+  '[1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7]',
+  'A workhorse designed for technical trails, the Speedgoat returns with less weight and more traction than ever before.
+  A new shoe from outsole to laces, this trail beast is updated with Vibram® Megagrip with Traction Lug for enhanced grip on loose soil.
+  Retaining the same stack height and rocker profile, the Speedgoat 5 employs a lighter midsole compound and heartier, double layer jacquard mesh to inspire confidence on any terrain.',
+  '/images/speedgoat1.png',
+  'true',
+  3
+
 );
 
 insert into "images"(
