@@ -32,6 +32,7 @@ insert into "products" (
   "size",
   "details",
   "imageUrl",
+  "featured",
   "categoryId"
 ) values (
   'Vaporfly 2',
@@ -42,6 +43,7 @@ insert into "products" (
   It helps improve comfort and breathability with a redesigned upper.
   From a 10K to a marathon, this model, like the previous version, has the responsive cushioning and secure support to push you towards your personal best.',
   '/images/nikevaporfly1.png',
+  'false',
   2
 ),
 (
@@ -53,6 +55,7 @@ insert into "products" (
   Sporting a stripped back creel mesh upper and lay-flat tongue, the new Mach 5 delivers a snappier
   ride with PROFLYs stacked midsole setup, offering a lightweight, responsive foam directly underfoot and rubberized EVA below.',
   '/images/hokamach1.png',
+  'false',
   2
 ),
 (
@@ -63,6 +66,7 @@ insert into "products" (
   'Running never felt like this. Our biggest Cloud elements ever meet an ultra powerful Speedboard®.
   The result? Extremely soft landings and maximum rebound, for energy return you won' || E't believe. This is running on Clouds with the volume turned up.',
   '/images/cloudmonsters1.png',
+  'false',
   2
 ),
 (
@@ -73,6 +77,7 @@ insert into "products" (
   'From 5Ks to full marathons, the GEL-KAYANO® 30 shoe is designed to provide advanced stability and softer cushioning properties.
   ​The new 4D GUIDANCE SYSTEM™ helps provide adaptive stability. This helps you experience a more supportive and balanced stride during your distance training.',
   '/images/asics1.png',
+  'false',
   2
 ),
 (
@@ -84,6 +89,7 @@ insert into "products" (
   It helps improve comfort and breathability with a redesigned upper.
   From a 10K to a marathon, this model, like the previous version, has the responsive cushioning and secure support to push you towards your personal best.',
   '/images/mensnike1.png',
+  'false',
   1
 ),
 (
@@ -95,6 +101,7 @@ insert into "products" (
   Sporting a stripped back creel mesh upper and lay-flat tongue, the new Mach 5 delivers a snappier
   ride with PROFLYs stacked midsole setup, offering a lightweight, responsive foam directly underfoot and rubberized EVA below.',
   '/images/menshoka1.png',
+  'false',
   1
 ),
 (
@@ -105,6 +112,7 @@ insert into "products" (
   'Running never felt like this. Our biggest Cloud elements ever meet an ultra powerful Speedboard®.
   The result? Extremely soft landings and maximum rebound, for energy return you won' || E't believe. This is running on Clouds with the volume turned up.',
   '/images/menson1.png',
+  'false',
   1
 ),
 (
@@ -115,6 +123,7 @@ insert into "products" (
   'From 5Ks to full marathons, the GEL-KAYANO® 30 shoe is designed to provide advanced stability and softer cushioning properties.
   ​The new 4D GUIDANCE SYSTEM™ helps provide adaptive stability. This helps you experience a more supportive and balanced stride during your distance training.',
   '/images/mensasics1.png',
+  'false',
   1
 ),
 (
@@ -126,6 +135,7 @@ insert into "products" (
   these shoes will help get you there.
   Breathable on top and bouncy on bottom, the lightweight design flexes with your foot so you comfortably cut, corner and spring into action when it' || E's time to play.',
   '/images/kidsnike1.png',
+  'false',
   3
 ),
 (
@@ -137,6 +147,7 @@ insert into "products" (
   and performance—now in a slightly smaller package. Designed to fit the unique shape of kids' || E' feet,
   we' || E've cued up an ultralight 30% sugarcane midsole, 31% recycled yarn upper, plus a high-abrasion rubber outsole to keep up with the most active of kiddos.',
   '/images/kidshoka1.png',
+  'false',
   3
 ),
 (
@@ -146,6 +157,7 @@ insert into "products" (
   '[1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7]',
   'The shoe millions love, now adapted for 8-15 year olds. Lightweight, agile and flexible, so they can rewrite the limits.',
   '/images/kidson1.png',
+  'false',
   3
 ),
 (
@@ -158,5 +170,54 @@ insert into "products" (
   these shoes offer a more accommodating fit for growing feet.
   Lastly, this style includes a solid rubber outsole, a medial wrap-up, and toe rubber stitching to improve durability.',
   '/images/kidsasics1.png',
+  'false',
   3
-);
+),
+(
+  'Vaporfly 3',
+  'Nike',
+  260,
+  '[5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5]',
+  'Catch ‘em if you can. Giving you race-day speed to conquer any distance, the Nike Vaporfly 3 is made for the chasers, the racers,
+  the elevated pacers who can’t turn down the thrill of the pursuit.
+  We reworked the leader of the super shoe pack and tuned the engine underneath to help you chase personal bests from a 10K to marathon.
+  From elite runners to those new to racing, this versatile road-racing workhorse is for those who see speed as a gateway to more miles and more seemingly uncatchable highs.',
+  '/images/nike2.png',
+  'true',
+  1
+),
+(
+  'Mach X',
+  'Hoka',
+  180,
+  '[5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5]',
+  'What do you get when you cross the comfort and support of the Mach with a propulsive Pebax® plate?
+  You’re looking at it. A pace-pushing trainer built with high-rebound cushioning; the new Mach X is supercharged with a layer of PEBA foam that’s 34% more resilient than the Carbon X3 foam.
+  Softer and snappier than ever before, this adaptable trainer is comfortable enough for endurance efforts and responds equally well to pace increases.',
+  '/images/hoka1.png',
+  'true',
+  1
+),
+(
+  'Metaspeed Edge+',
+  'Asics',
+  250,
+  '[5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5]',
+  'The METASPEED™ EDGE+ racing shoes are designed for cadence-style runners who are looking to start fast and finish faster.
+  Runners wearing these shoes will be able to take longer strides while conserving energy with each step. ​
+  Thanks to an energetic midsole foam and a propulsive carbon plate, runners wearing these shoes will be able to conserve more energy while maintaining their pace at the later stages of the race.​',
+  '/images/asicsf1.png',
+  'true',
+  2
+),
+(
+  'Cloudrunner',
+  'On',
+  170,
+  '[5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5]',
+  'Enjoy super-soft landings and support at every step. CloudTec® cushioning in ultralight Zero-Gravity foam and a wider bottom unit with a cradle-shaped construction
+  let you forget gravity. Plus, the upgraded 360° waterproof upper keeps you cool and dry whatever the conditions.',
+  '/images/on1.png',
+  'true',
+  2
+)

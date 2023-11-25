@@ -21,6 +21,7 @@ CREATE TABLE "products" (
   "size" text,
   "details" text,
   "imageUrl" text,
+  "featured" boolean,
   "categoryId" int
 );
 

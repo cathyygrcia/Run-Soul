@@ -48,12 +48,11 @@ export function Catalog({ text, categoryId, search, featured }: Props) {
     product.brand.toLocaleLowerCase().includes(search.toLocaleLowerCase())
   );
   return (
-    <div className="container">
+    <div className="shoe-container ">
       <h1>{text}</h1>
-      <hr />
-      <div className="row">
+      <div className="row flex flex-wrap justify-center">
         {displayProducts?.map((product) => (
-          <div key={product.productId} className="col-12 col-md-6 col-lg-4">
+          <div key={product.productId} className="">
             <ProductCard product={product} />
           </div>
         ))}
@@ -68,18 +67,16 @@ type CardProps = {
 export function ProductCard({ product }: CardProps) {
   const { name, price, brand, imageUrl, productId } = product;
   return (
-    <Link
-      to={`/details/${productId}`}
-      className="product text-dark card mb-4 shadow-sm text-decoration-none">
+    <Link to={`/details/${productId}`} className="">
       {/* TODO: Instead of a div, the above should link to `/details/:productId` */}
 
-      <div className="justify-center items-center">
-        <div className="display flex justify-center items-center">
+      <div className="flex flex-col justify-center items-center ml-16 ">
+        <div className="display flex justify-center items-center hover:transform hover:scale-95 transition-transform duration-300 ease-in-out">
           <img src={imageUrl} />
         </div>
         <h1>{brand}</h1>
         <h3>{name}</h3>
-        <p>{price}</p>
+        <p>${price}</p>
       </div>
     </Link>
   );

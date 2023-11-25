@@ -22,7 +22,7 @@ type Props = {
 export default function Header({ onSearch }: Props) {
   return (
     <div>
-      <nav className="bg-goldish p-8 columns-3">
+      <nav className="bg-goldish p-8 columns-3 ">
         <ul className="flex gap-3">
           <li>
             <Link to="mens">Mens</Link>

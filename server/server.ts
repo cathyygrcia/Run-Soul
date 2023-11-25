@@ -62,6 +62,7 @@ app.get('/api/featured', async (req, res, next) => {
             "details",
             "brand"
         from "products"
+        where "featured" = true
     `;
     const result = await db.query<Product>(sql);
     res.json(result.rows);
