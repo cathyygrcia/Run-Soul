@@ -49,8 +49,8 @@ export function Catalog({ text, categoryId, search, featured }: Props) {
   );
   return (
     <div className="shoe-container ">
-      <h1 className="ml-20 text-4xl">{text}</h1>
-      <div className="row flex flex-wrap justify-center">
+      <h1 className="ml-20 text-4xl white">{text}</h1>
+      <div className="flex flex-wrap justify-center">
         {displayProducts?.map((product) => (
           <div key={product.productId} className="">
             <ProductCard product={product} />
@@ -70,13 +70,13 @@ export function ProductCard({ product }: CardProps) {
     <Link to={`/details/${productId}`} className="">
       {/* TODO: Instead of a div, the above should link to `/details/:productId` */}
 
-      <div className="flex flex-col justify-center items-center ml-16 ">
+      <div className="flex flex-col items-center ml-16 ">
         <div className="display flex justify-center items-center hover:transform hover:scale-95 transition-transform duration-300 ease-in-out">
           <img src={imageUrl} />
         </div>
-        <h1 className="mt-3">{brand}</h1>
-        <h3>{name}</h3>
-        <p className="mb-3">${price}</p>
+        <h1 className="mt-3 white">{brand}</h1>
+        <h3 className="white">{name}</h3>
+        <p className="mb-3 white">${price}</p>
       </div>
     </Link>
   );

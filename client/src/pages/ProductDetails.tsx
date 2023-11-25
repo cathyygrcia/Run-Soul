@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchProduct, type Product } from '../lib';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 export function ProductDetails() {
@@ -40,6 +40,10 @@ export function ProductDetails() {
   const { name, imageUrl, price, brand } = product;
   return (
     <>
+      <Link to="/">
+        {/* TODO: Instead of a div, the above should link to `/` */}
+        <button className="back-button"> &lt; Back to catalog</button>
+      </Link>
       <div className="flex justify-center">
         <div className="image-container">
           <div className="images-row flex">
@@ -53,16 +57,16 @@ export function ProductDetails() {
             <div className="hero flex justify-center items-center">
               <img src={imageUrl} />
             </div>
-            <button>Add to Cart</button>
+            <button className="cart-button">Add to Cart</button>
           </div>
         </div>
         <div className="details-container">
           <div className="details-header flex justify-center">
-            <h1 className="text-6xl">
+            <h1 className="text-6xl white">
               {brand} {name}
             </h1>
           </div>
-          <p className="mt-5 text-2xl mb-8">${price}</p>
+          <p className="mt-5 text-2xl mb-8 white">${price}</p>
           <div className="sizes">
             <div className="size-box"></div>
             <div className="size-box"></div>

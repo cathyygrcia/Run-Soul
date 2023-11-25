@@ -1,5 +1,4 @@
 import { Catalog } from '../pages/Catalog';
-
 import HeaderPics from './HeaderPics';
 
 type Props = {

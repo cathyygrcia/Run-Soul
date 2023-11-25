@@ -11,12 +11,12 @@ export default function Footer({ product }: Props) {
       <div className="footer">
         <div className="flex justify-end">
           <div className="details-info">
-            <p className="text-2xl">
+            <p className="text-xl white">
               The Rundown:
               <br />
               <br />
             </p>
-            <p> {details}</p>
+            <p className="white"> {details}</p>
           </div>
         </div>
       </div>

@@ -10,6 +10,8 @@
 --      ('Build projects', false),
 --      ('Get a job', false);
 
+
+
 insert into "category" (
   "name"
 )
@@ -220,4 +222,201 @@ insert into "products" (
   '/images/on1.png',
   'true',
   2
+);
+
+insert into "images"(
+  "productId",
+  "imageUrl"
 )
+values(
+  1,
+  '/images/nikevaporfly2.png'
+),
+(
+  1,
+  '/images/nikevaporfly3.png'
+),
+(
+  1,
+  '/images/nikevaporfly4.png'
+),
+(
+  2,
+  '/images/hokamach2.png'
+),
+(
+  2,
+  '/images/hokamach3.png'
+),
+(
+  2,
+  '/images/hokamach4.png'
+),
+(
+  3,
+  '/images/cloudmonsters2.png'
+),
+(
+  3,
+  '/images/cloudmonsters3.png'
+),
+(
+  3,
+  '/images/cloudmonsters4.png'
+),
+(
+  4,
+  '/images/asics2.png'
+),
+(
+  4,
+  '/images/asics3.png'
+),
+(
+  4,
+  '/images/asics4.png'
+),
+(
+  5,
+  '/images/mensnike2.png'
+),
+(
+  5,
+  '/images/mensnike3.png'
+),
+(
+  5,
+  '/images/mensnike4.png'
+),
+(
+  6,
+  '/images/menshoka2.png'
+),
+(
+  6,
+  '/images/menshoka3.png'
+),
+(
+  6,
+  '/images/menshoka4.png'
+),
+(
+  7,
+  '/images/menson2.png'
+),
+(
+  7,
+  '/images/menson3.png'
+),
+(
+  7,
+  '/images/menson4.png'
+),
+(
+  8,
+  '/images/mensasics2.png'
+),
+(
+  8,
+  '/images/mensasics3.png'
+),
+(
+  8,
+  '/images/mensasics4.png'
+),
+(
+  9,
+  '/images/kidsnike2.png'
+),
+(
+  9,
+  '/images/kidsnike3.png'
+),
+(
+  9,
+  '/images/kidsnike4.png'
+),
+(
+  10,
+  '/images/kidshoka2.png'
+),
+(
+  10,
+  '/images/kidshoka3.png'
+),
+(
+  10,
+  '/images/kidshoka4.png'
+),
+(
+  11,
+  '/images/kidson2.png'
+),
+(
+  11,
+  '/images/kidson3.png'
+),
+(
+  11,
+  '/images/kidson4.png'
+),
+(
+  12,
+  '/images/kidsasics2.png'
+),
+(
+  12,
+  '/images/kidsasics3.png'
+),
+(
+  12,
+  '/images/kidsasics4.png'
+),
+(
+  13,
+  '/images/nike1.png'
+),
+(
+  13,
+  '/images/nike3.png'
+),
+(
+  13,
+  '/images/nike4.png'
+),
+(
+  14,
+  '/images/hoka2.png'
+),
+(
+  14,
+  '/images/hoka3.png'
+),
+(
+  14,
+  '/images/hoka4.png'
+),
+(
+  15,
+  '/images/asicsf2.png'
+),
+(
+  15,
+  '/images/asicsf3.png'
+),
+(
+  15,
+  '/images/asicsf4.png'
+),
+(
+  16,
+  '/images/on2.png'
+),
+(
+  16,
+  '/images/on3.png'
+),
+(
+  16,
+  '/images/on4.png'
+);
