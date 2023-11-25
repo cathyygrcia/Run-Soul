@@ -1,7 +1,25 @@
-export default function Footer() {
+import { Product } from '../lib';
+
+type Props = {
+  product: Product;
+};
+
+export default function Footer({ product }: Props) {
+  const { details } = product;
   return (
-    <div>
-      <nav className="bg-goldish p-8 columns-3 "></nav>
-    </div>
+    <>
+      <div className="footer">
+        <div className="flex justify-end">
+          <div className="details-info">
+            <p className="text-2xl">
+              The Rundown:
+              <br />
+              <br />
+            </p>
+            <p> {details}</p>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

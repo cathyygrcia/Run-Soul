@@ -1,5 +1,5 @@
 import { Catalog } from '../pages/Catalog';
-import Footer from './Footer';
+
 import HeaderPics from './HeaderPics';
 
 type Props = {
@@ -12,7 +12,6 @@ export default function Homepage({ search }: Props) {
     <>
       <HeaderPics />
       <Catalog text="Featured" featured={true} search={search} />
-      <Footer />
     </>
   );
 }

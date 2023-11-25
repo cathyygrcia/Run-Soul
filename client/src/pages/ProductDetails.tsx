@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchProduct, type Product } from '../lib';
 import { useParams } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 export function ProductDetails() {
   // TODO: Retrieve productId from the route
@@ -36,10 +37,10 @@ export function ProductDetails() {
       </div>
     );
   if (!product) return null;
-  const { name, imageUrl, price, brand, details } = product;
+  const { name, imageUrl, price, brand } = product;
   return (
     <>
-      <div className="flex">
+      <div className="flex justify-center">
         <div className="image-container">
           <div className="images-row flex">
             <div className="">
@@ -48,10 +49,11 @@ export function ProductDetails() {
               <div className="product-img"></div>
             </div>
           </div>
-          <div className="images-row">
+          <div className="images-row flex flex-col items-center">
             <div className="hero flex justify-center items-center">
               <img src={imageUrl} />
             </div>
+            <button>Add to Cart</button>
           </div>
         </div>
         <div className="details-container">
@@ -73,16 +75,9 @@ export function ProductDetails() {
             <div className="size-box"></div>
             <div className="size-box"></div>
           </div>
-
-          <div className="details-info">
-            <p className="text-2xl">
-              The Rundown:
-              <br />
-            </p>
-            <p> {details}</p>
-          </div>
         </div>
       </div>
+      <Footer product={product} />
     </>
   );
 }
