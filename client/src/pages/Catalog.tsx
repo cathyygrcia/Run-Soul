@@ -49,7 +49,7 @@ export function Catalog({ text, categoryId, search, featured }: Props) {
   );
   return (
     <div className="shoe-container ">
-      <h1>{text}</h1>
+      <h1 className="ml-20 text-4xl">{text}</h1>
       <div className="row flex flex-wrap justify-center">
         {displayProducts?.map((product) => (
           <div key={product.productId} className="">
@@ -74,9 +74,9 @@ export function ProductCard({ product }: CardProps) {
         <div className="display flex justify-center items-center hover:transform hover:scale-95 transition-transform duration-300 ease-in-out">
           <img src={imageUrl} />
         </div>
-        <h1>{brand}</h1>
+        <h1 className="mt-3">{brand}</h1>
         <h3>{name}</h3>
-        <p>${price}</p>
+        <p className="mb-3">${price}</p>
       </div>
     </Link>
   );

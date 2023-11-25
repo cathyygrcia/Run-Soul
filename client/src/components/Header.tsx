@@ -23,7 +23,7 @@ export default function Header({ onSearch }: Props) {
   return (
     <div>
       <nav className="bg-goldish p-8 columns-3 ">
-        <ul className="flex gap-3">
+        <ul className="flex gap-3 text-xl">
           <li>
             <Link to="mens">Mens</Link>
           </li>
@@ -34,7 +34,7 @@ export default function Header({ onSearch }: Props) {
             <Link to="kids">Kids</Link>
           </li>
         </ul>
-        <h1>Run Soul</h1>
+        <h1 className="text-3xl">Run Soul</h1>
         <SearchBar onChange={onSearch} />
       </nav>{' '}
       <Outlet />

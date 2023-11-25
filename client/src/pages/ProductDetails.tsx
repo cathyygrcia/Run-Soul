@@ -38,14 +38,51 @@ export function ProductDetails() {
   if (!product) return null;
   const { name, imageUrl, price, brand, details } = product;
   return (
-    <div className="justify-center items-center">
-      <div className="display flex justify-center items-center">
-        <img src={imageUrl} />
+    <>
+      <div className="flex">
+        <div className="image-container">
+          <div className="images-row flex">
+            <div className="">
+              <div className="product-img"></div>
+              <div className="product-img"></div>
+              <div className="product-img"></div>
+            </div>
+          </div>
+          <div className="images-row">
+            <div className="hero flex justify-center items-center">
+              <img src={imageUrl} />
+            </div>
+          </div>
+        </div>
+        <div className="details-container">
+          <div className="details-header flex justify-center">
+            <h1 className="text-6xl">
+              {brand} {name}
+            </h1>
+          </div>
+          <p className="mt-5 text-2xl mb-8">${price}</p>
+          <div className="sizes">
+            <div className="size-box"></div>
+            <div className="size-box"></div>
+            <div className="size-box"></div>
+            <div className="size-box"></div>
+          </div>
+          <div className="sizes">
+            <div className="size-box"></div>
+            <div className="size-box"></div>
+            <div className="size-box"></div>
+            <div className="size-box"></div>
+          </div>
+
+          <div className="details-info">
+            <p className="text-2xl">
+              The Rundown:
+              <br />
+            </p>
+            <p> {details}</p>
+          </div>
+        </div>
       </div>
-      <h1>{brand}</h1>
-      <h3>{name}</h3>
-      <p>{price}</p>
-      <p>{details}</p>
-    </div>
+    </>
   );
 }
