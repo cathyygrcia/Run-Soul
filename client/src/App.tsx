@@ -5,6 +5,7 @@ import Header from './components/Header';
 
 import { Catalog } from './pages/Catalog';
 import { useState } from 'react';
+import { ProductDetails } from './pages/ProductDetails';
 
 export default function App() {
   const [search, setSearch] = useState('');
@@ -32,6 +33,7 @@ export default function App() {
               <Catalog text="Kids Shoes" categoryId={3} search={search} />
             }
           />
+          <Route path="details/:productId" element={<ProductDetails />} />
         </Route>
       </Routes>
     </>

@@ -62,6 +62,7 @@ app.get('/api/featured', async (req, res, next) => {
             "details",
             "brand"
         from "products"
+        where "featured" = true
     `;
     const result = await db.query<Product>(sql);
     res.json(result.rows);
@@ -96,6 +97,56 @@ app.get('/api/products/:categoryId', async (req, res, next) => {
         `cannot find product with categoryId ${categoryId}`
       );
     }
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/productdetails/:productId', async (req, res, next) => {
+  try {
+    const productId = Number(req.params.productId);
+    if (!productId) {
+      throw new ClientError(400, 'productId must be a positive integer');
+    }
+    const sql = `
+      select "productId",
+            "name",
+            "price",
+            "imageUrl",
+            "brand",
+            "details",
+            "size"
+        from "products"
+        where "productId" = $1
+    `;
+    const params = [productId];
+    const result = await db.query<Product>(sql, params);
+    if (!result.rows[0]) {
+      throw new ClientError(
+        404,
+        `cannot find product with productId ${productId}`
+      );
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/productImages/:productId', async (req, res, next) => {
+  try {
+    const productId = Number(req.params.productId);
+    if (!productId) {
+      throw new ClientError(400, 'productId must be a positive integer');
+    }
+    const sql = `
+      SELECT *
+      FROM "images"
+      WHERE "productId" = $1
+    `;
+    const params = [productId];
+    const result = await db.query(sql, params);
     res.json(result.rows);
   } catch (err) {
     next(err);
