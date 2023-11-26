@@ -2,7 +2,7 @@ import { Link, Outlet } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-
+// import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 type Props = {
   onSearch: (text: string) => void;
 };
@@ -43,7 +43,9 @@ export default function Header({ onSearch }: Props) {
               <SearchBar onChange={onSearch} />
             </div>
             <div className="ml-9">
-              <FontAwesomeIcon icon={faCartShopping} size="2x" />
+              <Link to="/cart">
+                <FontAwesomeIcon icon={faCartShopping} size="2x" />
+              </Link>
             </div>
           </div>
         </nav>{' '}
@@ -58,11 +60,13 @@ type SearchProps = {
 
 function SearchBar({ onChange }: SearchProps) {
   return (
-    <input
-      className="search"
-      type="text"
-      placeholder="search"
-      onChange={(e) => onChange(e.currentTarget.value)}
-    />
+    <>
+      <input
+        className="search "
+        type="text"
+        placeholder="search "
+        onChange={(e) => onChange(e.currentTarget.value)}
+      />
+    </>
   );
 }

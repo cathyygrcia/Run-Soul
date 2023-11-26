@@ -55,9 +55,12 @@ export function ProductDetails() {
       <div className="flex justify-center items-center">
         <div className="image-container">
           <div className="images-row">
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center ">
               {images.map((image) => (
-                <img src={image.imageUrl} className="product-img" />
+                <img
+                  src={image.imageUrl}
+                  className="product-img hover:transform hover:scale-95 transition-transform duration-300 ease-out-in"
+                />
               ))}
             </div>
           </div>
@@ -79,7 +82,7 @@ export function ProductDetails() {
           </div>
           <div className="sizes">
             {product.size.map((size) => (
-              <div className="size-box">{size}</div>
+              <div className="size-box ">{size}</div>
             ))}
           </div>
           <button className="cart-button white">Add to Cart</button>

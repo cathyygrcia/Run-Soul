@@ -432,4 +432,16 @@ values(
 (
   16,
   '/images/on4.png'
+),
+(
+  17,
+  '/images/speedgoat2.png'
+),
+(
+  17,
+  '/images/speedgoat3.png'
+),
+(
+  17,
+  '/images/speedgoat4.png'
 );

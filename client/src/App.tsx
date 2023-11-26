@@ -6,6 +6,7 @@ import Header from './components/Header';
 import { Catalog } from './pages/Catalog';
 import { useState } from 'react';
 import { ProductDetails } from './pages/ProductDetails';
+import { ViewCart } from './pages/ViewCart';
 
 export default function App() {
   const [search, setSearch] = useState('');
@@ -34,6 +35,7 @@ export default function App() {
             }
           />
           <Route path="details/:productId" element={<ProductDetails />} />
+          <Route path="cart" element={<ViewCart />} />
         </Route>
       </Routes>
     </>
