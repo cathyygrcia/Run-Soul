@@ -14,13 +14,6 @@ li {
   list-style: none;
 }
 
-input {
-  border-radius: 0.5rem;
-  background-color: rgb(234, 218, 162, 0.6);
-  padding: 0.5rem;
-  width: 100%;
-}
-
 input:focus {
   outline: none;
 }
@@ -30,6 +23,28 @@ input::placeholder {
 }
 
 img {
+  width: 100%;
+}
+
+.nav {
+  background-color: #cdbe6b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+
+.ul {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.search-bar {
+  border-radius: 0.5rem;
+  background-color: rgb(234, 218, 162, 0.6);
+  padding: 0.5rem;
   width: 100%;
 }
 
@@ -66,7 +81,7 @@ img {
   background-image: url('/images/running2.jpeg');
   background-position: center;
   background-size: cover;
-  opacity: 0.7; /* Adjust the opacity value */
+  opacity: 0.8; /* Adjust the opacity value */
   position: absolute;
   top: 0;
   left: 0;
@@ -142,6 +157,19 @@ img {
   display: flex;
 }
 
+.mini-images {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .details-container {
   margin: 0 auto;
   max-width: 500px;
@@ -183,6 +211,10 @@ img {
 }
 
 .size-box:hover {
+  border-color: white;
+}
+
+.highlight {
   border-color: white;
 }
 
@@ -278,4 +310,90 @@ img {
   padding: 1rem;
   color: white;
   width: 200px;
+}
+
+@media screen and (width <= 768px) {
+  :root {
+    width: 1000px;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  .product-details-container {
+    flex-direction: column;
+  }
+
+  .cart-row {
+    width: 500px;
+  }
+
+  .mini-images {
+    flex-direction: row;
+  }
+
+  .image-container {
+    flex-direction: column-reverse;
+  }
+
+  .margin {
+    margin-left: 1rem;
+  }
+
+  .sizes {
+    justify-content: center;
+  }
+
+  .display {
+    width: 700px;
+  }
+
+  /*
+  .ul {
+    display: none;
+  } */
+}
+
+@media screen and (width <= 1500px) {
+  :root {
+    width: 1000px;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  .product-details-container {
+    flex-direction: column;
+  }
+
+  .cart-row {
+    width: 500px;
+  }
+
+  .mini-images {
+    flex-direction: row;
+  }
+
+  .image-container {
+    flex-direction: column-reverse;
+  }
+
+  .margin {
+    margin-left: 1rem;
+  }
+
+  .sizes {
+    justify-content: center;
+  }
+
+  .display {
+    width: 700px;
+  }
+
+  /*
+  .ul {
+    display: none;
+  } */
 }

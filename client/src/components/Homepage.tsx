@@ -10,7 +10,7 @@ export default function Homepage({ search }: Props) {
   return (
     <>
       <HeaderPics />
-      <Catalog text="Featured" featured={true} search={search} />
+      <Catalog text="Featured Collection" featured={true} search={search} />
     </>
   );
 }

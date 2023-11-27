@@ -11,7 +11,9 @@ export function ViewCart() {
   }
 
   function handleMinus() {
-    setQuantity(quantity - 1);
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
   }
 
   function handleRemove() {
@@ -49,9 +51,11 @@ export function ViewCart() {
           </div>
         </div>
         <div className="checkout-row justify-end">
-          <div>
-            <button className="checkout-button">Checkout</button>
-          </div>
+          <Link to="/checkout">
+            <div>
+              <button className="checkout-button">Checkout</button>
+            </div>
+          </Link>
         </div>
       </div>
     </>

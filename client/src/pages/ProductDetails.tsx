@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Image, fetchProduct, type Product, fetchImages } from '../lib';
+import {
+  Image,
+  fetchProduct,
+  type Product,
+  fetchImages,
+  addToCart,
+} from '../lib';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 
@@ -11,6 +17,21 @@ export function ProductDetails() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<unknown>();
   const [images, setImages] = useState<Image[]>();
+  const [size, setSize] = useState<number>();
+
+  async function handleAddToCart() {
+    // const newItem = { productId, size };
+    try {
+      setIsLoading(true);
+      if (productId && size) {
+        await addToCart(+productId, size);
+      }
+    } catch (err) {
+      alert(`Select a size: ${err}`);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
     async function loadProduct(productId: number) {
@@ -46,20 +67,21 @@ export function ProductDetails() {
     );
   if (!product || !images) return null;
   const { name, imageUrl, price, brand } = product;
+
   return (
     <>
       <Link to="/">
         {/* TODO: Instead of a div, the above should link to `/` */}
         <button className="back-button white"> &lt; Back</button>
       </Link>
-      <div className="flex justify-center items-center">
+      <div className="product-details-container">
         <div className="image-container">
           <div className="images-row">
-            <div className="flex flex-col items-center justify-center ">
+            <div className="mini-images ">
               {images.map((image) => (
                 <img
                   src={image.imageUrl}
-                  className="product-img hover:transform hover:scale-95 transition-transform duration-300 ease-out-in"
+                  className="product-img hover:transform hover:scale-95 transition-transform duration-300 ease-out-in margin"
                 />
               ))}
             </div>
@@ -81,11 +103,17 @@ export function ProductDetails() {
             <p className="white">Select size: </p>
           </div>
           <div className="sizes">
-            {product.size.map((size) => (
-              <div className="size-box ">{size}</div>
+            {product.size.map((s) => (
+              <div
+                onClick={() => setSize(s)}
+                className={`size-box ${s === size ? 'highlight' : ''}`}>
+                {s}
+              </div>
             ))}
           </div>
-          <button className="cart-button white">Add to Cart</button>
+          <button onClick={handleAddToCart} className="cart-button white">
+            Add to Cart
+          </button>
         </div>
       </div>
       <Footer product={product} />

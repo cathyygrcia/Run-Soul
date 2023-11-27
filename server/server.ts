@@ -153,6 +153,47 @@ app.get('/api/productImages/:productId', async (req, res, next) => {
   }
 });
 
+app.post('/api/cart', async (req, res, next) => {
+  try {
+    const { productId, quantity, size } = req.body;
+    if (!productId) {
+      throw new ClientError(
+        400,
+        `Product with productId ${productId} not found`
+      );
+    }
+
+    const addToCartQuery = `
+      INSERT INTO "cart" ("productId", "quantity", "size")
+      VALUES ($1, $2, $3)
+      RETURNING *
+    `;
+    const addToCartParams = [productId, quantity, size];
+    const result = await db.query(addToCartQuery, addToCartParams);
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/cart', async (req, res, next) => {
+  try {
+    const sql = `
+      select "productId",
+            "customerId",
+            "quantity",
+            "productId",
+            "size"
+        from "cart"
+    `;
+    const result = await db.query<Product>(sql);
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
 /**
  * Serves React's index.html if no api route matches.
  *

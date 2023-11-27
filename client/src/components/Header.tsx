@@ -11,8 +11,8 @@ export default function Header({ onSearch }: Props) {
   return (
     <>
       <div>
-        <nav className="flex bg-goldish p-8 space-x-24 justify-between items-center">
-          <ul className="flex gap-3 text-xl">
+        <nav className="nav">
+          <ul className="ul">
             <li>
               <Link to="/">
                 <FontAwesomeIcon icon={faHouse} />
@@ -62,7 +62,7 @@ function SearchBar({ onChange }: SearchProps) {
   return (
     <>
       <input
-        className="search "
+        className="search-bar"
         type="text"
         placeholder="search "
         onChange={(e) => onChange(e.currentTarget.value)}

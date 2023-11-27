@@ -42,3 +42,21 @@ export async function fetchImages(productId: number): Promise<Image[]> {
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
   return await res.json();
 }
+
+export async function addToCart(productId: number, size: number) {
+  const requestBody = JSON.stringify({ productId, size, quantity: 1 });
+
+  const res = await fetch('/api/cart', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: requestBody,
+  });
+
+  if (!res.ok) {
+    throw new Error(`fetch Error ${res.status}`);
+  }
+
+  return await res.json();
+}
