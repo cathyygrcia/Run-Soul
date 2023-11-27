@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 export function ViewCart() {
   const [quantity, setQuantity] = useState(0);
@@ -47,6 +48,11 @@ export function ViewCart() {
             <p>Total</p>
           </div>
         </div>
+        <div className="checkout-row justify-end">
+          <div>
+            <button className="checkout-button">Checkout</button>
+          </div>
+        </div>
       </div>
     </>
   );
@@ -60,9 +66,11 @@ export function ViewCart() {
             <div>{quantity}</div>
             <div onClick={() => handleAdd()}>+</div>
           </div>
-          <div className="ml-3 mt-2.5" onClick={() => handleRemove()}>
-            <FontAwesomeIcon icon={faTrash} />
-          </div>
+          <Link to="/empty">
+            <div className="ml-3 mt-2.5" onClick={() => handleRemove()}>
+              <FontAwesomeIcon icon={faTrash} />
+            </div>
+          </Link>
         </div>
       </>
     );
