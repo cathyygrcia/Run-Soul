@@ -14,6 +14,11 @@ export type Image = {
   imageUrl: string;
 };
 
+export type CartProduct = Product & {
+  quantity: number;
+  size: number;
+};
+
 /**
  * Fetches all products from the API.
  * @returns Promise that resolves to an array of products.
@@ -42,6 +47,12 @@ export async function fetchImages(productId: number): Promise<Image[]> {
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
   return await res.json();
 }
+
+// export async function fetchCart(): Promise<Product[]> {
+//   const res = await fetch('/api/cart');
+//   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+//   return await res.json();
+// }
 
 export async function addToCart(productId: number, size: number) {
   const requestBody = JSON.stringify({ productId, size, quantity: 1 });

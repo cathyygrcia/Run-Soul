@@ -184,8 +184,13 @@ app.get('/api/cart', async (req, res, next) => {
             "customerId",
             "quantity",
             "productId",
-            "size"
+            "cart"."size",
+            "name",
+            "price",
+            "brand",
+            "imageUrl"
         from "cart"
+        join "products" using ("productId")
     `;
     const result = await db.query<Product>(sql);
     res.json(result.rows);
