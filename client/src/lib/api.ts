@@ -71,3 +71,37 @@ export async function addToCart(productId: number, size: number) {
 
   return await res.json();
 }
+
+export async function removeFromCart(
+  productId: number,
+  size: number
+): Promise<void> {
+  const req = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const res = await fetch(`/api/cart/${productId}/${size}`, req);
+
+  if (!res.ok) {
+    throw new Error(`Fetch Error ${res.status}`);
+  }
+}
+
+export async function updateCart(
+  productId: number,
+  quantity: number
+): Promise<CartProduct> {
+  const req = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ productId, quantity }),
+  };
+  const res = await fetch(`/api/cart/${productId}`, req);
+  if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+  return await res.json();
+}

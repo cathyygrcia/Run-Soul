@@ -183,7 +183,6 @@ app.get('/api/cart', async (req, res, next) => {
       select "productId",
             "customerId",
             "quantity",
-            "productId",
             "cart"."size",
             "name",
             "price",
@@ -194,6 +193,26 @@ app.get('/api/cart', async (req, res, next) => {
     `;
     const result = await db.query<Product>(sql);
     res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.delete('/api/cart/:productId/:size', async (req, res, next) => {
+  try {
+    const productId = Number(req.params.productId);
+    const size = req.params.size;
+    const sql = `
+      delete
+        from "cart"
+        where "productId" = $1
+        and "size" = $2
+        returning *;
+    `;
+    const params = [productId, size];
+    const result = await db.query<Product>(sql, params);
+    res.json(result.rows[0]);
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }

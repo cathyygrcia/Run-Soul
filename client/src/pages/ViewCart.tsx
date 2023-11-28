@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import { CartProduct } from '../lib';
+import { Link, useNavigate } from 'react-router-dom';
+import { CartProduct, removeFromCart } from '../lib';
 
 export function ViewCart() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<unknown>();
   const [cart, setCart] = useState<CartProduct[]>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchCart() {
@@ -27,6 +28,13 @@ export function ViewCart() {
     }
     fetchCart();
   }, []);
+
+  useEffect(() => {
+    if (cart?.length === 0) {
+      navigate('/empty');
+    }
+  }, [cart, navigate]);
+
   if (isLoading || !cart)
     return (
       <div className="loading">
@@ -41,6 +49,13 @@ export function ViewCart() {
       </div>
     );
 
+  function handleRemove(productId: number, size: number) {
+    const updatedCart = cart?.filter(
+      (item) => !(item.productId === productId && item.size === size)
+    );
+    setCart(updatedCart);
+  }
+
   return (
     <>
       <div className="blue">
@@ -48,7 +63,7 @@ export function ViewCart() {
       </div>
 
       <div className="cart-container">
-        <div className="cart-row">
+        <div className="cart-row1">
           <div className=" white info">
             <p>Product</p>
           </div>
@@ -60,12 +75,13 @@ export function ViewCart() {
             <p>Total</p>
           </div>
         </div>
+
         <div>
           <div className="cart-row">
             <div className=" white info">
               {cart?.map((product) => (
                 <div key={product.productId}>
-                  <CartCard cartProduct={product} />
+                  <CartCard cartProduct={product} onRemove={handleRemove} />
                 </div>
               ))}
             </div>
@@ -84,29 +100,51 @@ export function ViewCart() {
 }
 type CardProps = {
   cartProduct: CartProduct;
+  onRemove: (productId: number, size: number) => void;
 };
 
-export function CartCard({ cartProduct }: CardProps) {
+export function CartCard({ cartProduct, onRemove }: CardProps) {
   const [quantity, setQuantity] = useState(cartProduct.quantity);
+  const [total, setTotal] = useState(cartProduct.quantity * cartProduct.price);
+
   function handleAdd() {
-    setQuantity(quantity + 1);
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+    setTotal(newQuantity * cartProduct.price);
   }
   function handleMinus() {
     if (quantity > 0) {
-      setQuantity(quantity - 1);
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      setTotal(newQuantity * cartProduct.price);
+
+      if (newQuantity === 0) {
+        handleRemove();
+      }
     }
   }
-  function handleRemove() {
-    setQuantity(0);
+  async function handleRemove() {
+    try {
+      await removeFromCart(cartProduct.productId, cartProduct.size);
+      onRemove(cartProduct.productId, cartProduct.size);
+    } catch (error) {
+      alert('Error removing products');
+    }
   }
 
-  const { productId, size, name, price } = cartProduct;
+  const { size, name, imageUrl, brand } = cartProduct;
   return (
     <div className="cart-row">
       <div className=" white info">
-        <p>{productId}</p>
-        <p>{size}</p>
-        <p>{name}</p>
+        <div className="checkout-display">
+          <img src={imageUrl} />
+        </div>
+        <div className="checkout-details">
+          <p>Category</p>
+          <p>{brand}</p>
+          <p>{name}</p>
+          <p>Size: {size}</p>
+        </div>
       </div>
 
       <div className="white info">
@@ -118,7 +156,7 @@ export function CartCard({ cartProduct }: CardProps) {
         />
       </div>
       <div className="white info">
-        <p>{price}</p>
+        <p>${total}</p>
       </div>
     </div>
   );
@@ -140,11 +178,10 @@ function Quantity({ quantity, onMinus, onAdd, onRemove }: QuantityProps) {
           <div>{quantity}</div>
           <div onClick={() => onAdd()}>+</div>
         </div>
-        <Link to="/empty">
-          <div className="ml-3 mt-2.5" onClick={() => onRemove()}>
-            <FontAwesomeIcon icon={faTrash} />
-          </div>
-        </Link>
+
+        <div className="ml-3 mt-2.5" onClick={() => onRemove()}>
+          <FontAwesomeIcon icon={faTrash} />
+        </div>
       </div>
     </>
   );
