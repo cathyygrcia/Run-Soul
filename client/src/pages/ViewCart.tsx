@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { CartProduct, removeFromCart } from '../lib';
+import { CartProduct, removeFromCart, updateCart } from '../lib';
 
 export function ViewCart() {
   const [isLoading, setIsLoading] = useState(true);
@@ -49,10 +49,20 @@ export function ViewCart() {
       </div>
     );
 
-  function handleRemove(productId: number, size: number) {
-    const updatedCart = cart?.filter(
-      (item) => !(item.productId === productId && item.size === size)
-    );
+  function handleRemove(cartId: number) {
+    const updatedCart = cart?.filter((item) => !(item.cartId === cartId));
+    setCart(updatedCart);
+  }
+
+  function handleMinus(cartId: number, quantity: number) {
+    const updatedCart = cart?.map((item) => {
+      if (item.cartId === cartId) {
+        item.quantity = quantity;
+        return item;
+      } else {
+        return item;
+      }
+    });
     setCart(updatedCart);
   }
 
@@ -81,7 +91,11 @@ export function ViewCart() {
             <div className=" white info">
               {cart?.map((product) => (
                 <div key={product.productId}>
-                  <CartCard cartProduct={product} onRemove={handleRemove} />
+                  <CartCard
+                    cartProduct={product}
+                    onRemove={handleRemove}
+                    onUpdate={handleMinus}
+                  />
                 </div>
               ))}
             </div>
@@ -100,33 +114,46 @@ export function ViewCart() {
 }
 type CardProps = {
   cartProduct: CartProduct;
-  onRemove: (productId: number, size: number) => void;
+  onRemove: (cartId: number) => void;
+  onUpdate: (cartId: number, quantity: number) => void;
 };
 
-export function CartCard({ cartProduct, onRemove }: CardProps) {
+export function CartCard({ cartProduct, onRemove, onUpdate }: CardProps) {
   const [quantity, setQuantity] = useState(cartProduct.quantity);
-  const [total, setTotal] = useState(cartProduct.quantity * cartProduct.price);
+  const total = cartProduct.quantity * cartProduct.price;
 
-  function handleAdd() {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    setTotal(newQuantity * cartProduct.price);
-  }
-  function handleMinus() {
-    if (quantity > 0) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-      setTotal(newQuantity * cartProduct.price);
-
-      if (newQuantity === 0) {
-        handleRemove();
+  async function handleAdd() {
+    try {
+      const newQuantity = quantity + 1;
+      await updateCart(cartProduct.cartId, newQuantity);
+      if (newQuantity > 0) {
+        setQuantity(newQuantity);
+        onUpdate(cartProduct.cartId, newQuantity);
       }
+    } catch (error) {
+      alert('Error adding products');
     }
   }
+  async function handleMinus() {
+    try {
+      const newQuantity = quantity - 1;
+      await updateCart(cartProduct.cartId, newQuantity);
+      if (newQuantity > 0) {
+        setQuantity(newQuantity);
+        onUpdate(cartProduct.cartId, newQuantity);
+      }
+      if (newQuantity === 0) {
+        onRemove(cartProduct.cartId);
+      }
+    } catch (error) {
+      alert('Error removing products');
+    }
+  }
+
   async function handleRemove() {
     try {
-      await removeFromCart(cartProduct.productId, cartProduct.size);
-      onRemove(cartProduct.productId, cartProduct.size);
+      await removeFromCart(cartProduct.cartId);
+      onRemove(cartProduct.cartId);
     } catch (error) {
       alert('Error removing products');
     }
@@ -150,7 +177,7 @@ export function CartCard({ cartProduct, onRemove }: CardProps) {
       <div className="white info">
         <Quantity
           quantity={quantity}
-          onMinus={handleMinus}
+          onUpdate={handleMinus}
           onAdd={handleAdd}
           onRemove={handleRemove}
         />
@@ -164,17 +191,17 @@ export function CartCard({ cartProduct, onRemove }: CardProps) {
 
 type QuantityProps = {
   quantity: number;
-  onMinus: () => void;
+  onUpdate: () => void;
   onAdd: () => void;
   onRemove: () => void;
 };
 
-function Quantity({ quantity, onMinus, onAdd, onRemove }: QuantityProps) {
+function Quantity({ quantity, onUpdate, onAdd, onRemove }: QuantityProps) {
   return (
     <>
       <div className="flex  items-center ">
         <div className="quantity-box">
-          <div onClick={() => onMinus()}>-</div>
+          <div onClick={() => onUpdate()}>-</div>
           <div>{quantity}</div>
           <div onClick={() => onAdd()}>+</div>
         </div>

@@ -181,7 +181,7 @@ app.get('/api/cart', async (req, res, next) => {
   try {
     const sql = `
       select "productId",
-            "customerId",
+            "cartId",
             "quantity",
             "cart"."size",
             "name",
@@ -198,21 +198,39 @@ app.get('/api/cart', async (req, res, next) => {
   }
 });
 
-app.delete('/api/cart/:productId/:size', async (req, res, next) => {
+app.delete('/api/cart/:cartId', async (req, res, next) => {
   try {
-    const productId = Number(req.params.productId);
-    const size = req.params.size;
+    const cartId = Number(req.params.cartId);
+
     const sql = `
       delete
         from "cart"
-        where "productId" = $1
-        and "size" = $2
+        where "cartId" = $1
         returning *;
     `;
-    const params = [productId, size];
+    const params = [cartId];
     const result = await db.query<Product>(sql, params);
     res.json(result.rows[0]);
     res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.put('/api/cart/:cartId', async (req, res, next) => {
+  try {
+    const cartId = Number(req.params.cartId);
+    const { quantity } = req.body;
+    const sql = `
+      update "cart"
+        set
+          "quantity" = $1
+        where "cartId" = $2
+        returning *;
+    `;
+    const params = [quantity, cartId];
+    const result = await db.query<Product>(sql, params);
+    res.json(result.rows[0]);
   } catch (err) {
     next(err);
   }

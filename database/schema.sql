@@ -34,7 +34,7 @@ CREATE TABLE "customer" (
 );
 
 CREATE TABLE "cart" (
-  "customerId" serial PRIMARY KEY,
+  "cartId" serial PRIMARY KEY,
   "quantity" int,
   "productId" int,
   "size" int
