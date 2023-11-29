@@ -12,6 +12,7 @@ export type Product = {
 export type Image = {
   productId: number;
   imageUrl: string;
+  imagesId: number;
 };
 
 export type CartItem = {
@@ -52,11 +53,11 @@ export async function fetchImages(productId: number): Promise<Image[]> {
   return await res.json();
 }
 
-// export async function fetchCart(): Promise<Product[]> {
-//   const res = await fetch('/api/cart');
-//   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
-//   return await res.json();
-// }
+export async function fetchCart(): Promise<CartProduct[]> {
+  const res = await fetch('/api/cart');
+  if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+  return await res.json();
+}
 
 export async function addToCart(productId: number, size: number) {
   const requestBody = JSON.stringify({ productId, size, quantity: 1 });

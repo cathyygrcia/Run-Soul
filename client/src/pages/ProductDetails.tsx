@@ -5,11 +5,16 @@ import {
   type Product,
   fetchImages,
   addToCart,
+  fetchCart,
 } from '../lib';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 
-export function ProductDetails() {
+type Props = {
+  onAdd: (quantity: number) => void;
+};
+
+export function ProductDetails({ onAdd }: Props) {
   // TODO: Retrieve productId from the route
 
   const { productId } = useParams();
@@ -18,13 +23,36 @@ export function ProductDetails() {
   const [error, setError] = useState<unknown>();
   const [images, setImages] = useState<Image[]>();
   const [size, setSize] = useState<number>();
+  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // function handlePhotoClick(index) {
+  //   setCurrentImageIndex(index);
+  // }
+
+  // function renderPhotos() {
+  //   return images?.map((image, index) => (
+  //     <img
+  //       key={image.imageUrl}
+  //       src={image.imageUrl}
+  //       alt={`Mini ${index}`}
+  //       onClick={() => handlePhotoClick(index)}
+  //     />
+  //   ));
+  // }
 
   async function handleAddToCart() {
-    // const newItem = { productId, size };
     try {
+      const data = await fetchCart();
+
+      let quantity = 0;
+      for (let i = 0; i < data.length; i++) {
+        quantity += data[i].quantity;
+      }
+
       setIsLoading(true);
       if (productId && size) {
         await addToCart(+productId, size);
+        onAdd(quantity + 1);
       }
     } catch (err) {
       alert(`Select a size: ${err}`);
@@ -38,6 +66,7 @@ export function ProductDetails() {
       try {
         const product = await fetchProduct(productId);
         const images = await fetchImages(productId);
+
         setProduct(product);
         setImages(images);
       } catch (err) {
@@ -79,10 +108,11 @@ export function ProductDetails() {
           <div className="images-row">
             <div className="mini-images ">
               {images.map((image) => (
-                <img
-                  src={image.imageUrl}
+                <div
                   className="product-img hover:transform hover:scale-95 transition-transform duration-300 ease-out-in margin"
-                />
+                  key={image.imagesId}>
+                  <img src={image.imageUrl} className="" />
+                </div>
               ))}
             </div>
           </div>
@@ -106,12 +136,16 @@ export function ProductDetails() {
             {product.size.map((s) => (
               <div
                 onClick={() => setSize(s)}
-                className={`size-box ${s === size ? 'highlight' : ''}`}>
+                className={`size-box ${s === size ? 'highlight' : ''}`}
+                key={s}>
                 {s}
               </div>
             ))}
           </div>
-          <button onClick={handleAddToCart} className="cart-button white">
+          <button
+            onClick={handleAddToCart}
+            className="cart-button white"
+            onChange={handleAddToCart}>
             Add to Cart
           </button>
         </div>

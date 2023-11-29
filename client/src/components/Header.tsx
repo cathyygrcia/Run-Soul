@@ -2,12 +2,13 @@ import { Link, Outlet } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-// import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+
 type Props = {
   onSearch: (text: string) => void;
+  cartQuantity: number;
 };
 
-export default function Header({ onSearch }: Props) {
+export default function Header({ onSearch, cartQuantity }: Props) {
   return (
     <>
       <div>
@@ -44,7 +45,12 @@ export default function Header({ onSearch }: Props) {
             </div>
             <div className="ml-9">
               <Link to="/cart">
-                <FontAwesomeIcon icon={faCartShopping} size="2x" />
+                <div className="shop">
+                  <FontAwesomeIcon icon={faCartShopping} size="2x" />
+                  <div className="circle">
+                    <p>{cartQuantity}</p>
+                  </div>
+                </div>
               </Link>
             </div>
           </div>

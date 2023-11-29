@@ -156,22 +156,35 @@ app.get('/api/productImages/:productId', async (req, res, next) => {
 app.post('/api/cart', async (req, res, next) => {
   try {
     const { productId, quantity, size } = req.body;
-    if (!productId) {
-      throw new ClientError(
-        400,
-        `Product with productId ${productId} not found`
-      );
-    }
-
-    const addToCartQuery = `
-      INSERT INTO "cart" ("productId", "quantity", "size")
-      VALUES ($1, $2, $3)
-      RETURNING *
+    const checkCartQuery = `
+      SELECT * FROM "cart"
+      WHERE "productId" = $1 AND "size" = $2
     `;
-    const addToCartParams = [productId, quantity, size];
-    const result = await db.query(addToCartQuery, addToCartParams);
+    const checkCartParams = [productId, size];
+    const checkResult = await db.query(checkCartQuery, checkCartParams);
 
-    res.json(result.rows[0]);
+    if (checkResult.rows.length > 0) {
+      const updateCartQuery = `
+        UPDATE "cart"
+        SET "quantity" = "quantity" + $1
+        WHERE "productId" = $2 AND "size" = $3
+        RETURNING *
+      `;
+      const updateCartParams = [quantity, productId, size];
+      const updateResult = await db.query(updateCartQuery, updateCartParams);
+
+      res.json(updateResult.rows[0]);
+    } else {
+      const addToCartQuery = `
+        INSERT INTO "cart" ("productId", "quantity", "size")
+        VALUES ($1, $2, $3)
+        RETURNING *
+      `;
+      const addToCartParams = [productId, quantity, size];
+      const insertResult = await db.query(addToCartQuery, addToCartParams);
+
+      res.json(insertResult.rows[0]);
+    }
   } catch (err) {
     next(err);
   }

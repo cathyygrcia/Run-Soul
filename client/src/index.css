@@ -322,7 +322,7 @@ img {
 }
 
 .empty-container {
-  height: 400px;
+  height: 550px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -335,6 +335,24 @@ img {
   padding: 1rem;
   color: white;
   width: 200px;
+}
+
+.circle {
+  background-color: white;
+  border-radius: 100px;
+  width: 20px;
+  height: 20px;
+  padding: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -12px;
+  left: 27px;
+}
+
+.shop {
+  position: relative;
 }
 
 @media screen and (width <= 768px) {

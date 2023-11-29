@@ -2,31 +2,31 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { CartProduct, removeFromCart, updateCart } from '../lib';
+import { CartProduct, removeFromCart, updateCart, fetchCart } from '../lib';
 
-export function ViewCart() {
+type Props = {
+  onChange: (quantity: number) => void;
+};
+
+export function ViewCart({ onChange }: Props) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<unknown>();
   const [cart, setCart] = useState<CartProduct[]>();
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchCart() {
-      const url = '/api/cart';
+    async function loadFetchCart() {
       try {
-        const resp = await fetch(url);
-        if (!resp.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await resp.json();
+        const data = await fetchCart();
         setCart(data);
+        console.log(data);
       } catch (error) {
         setError(error);
       } finally {
         setIsLoading(false);
       }
     }
-    fetchCart();
+    loadFetchCart();
   }, []);
 
   useEffect(() => {
@@ -50,12 +50,23 @@ export function ViewCart() {
     );
 
   function handleRemove(cartId: number) {
-    const updatedCart = cart?.filter((item) => !(item.cartId === cartId));
+    if (!cart) {
+      return;
+    }
+    const updatedCart = cart.filter((item) => !(item.cartId === cartId));
     setCart(updatedCart);
+    let quantity = 0;
+    for (let i = 0; i < updatedCart.length; i++) {
+      quantity += updatedCart[i].quantity;
+    }
+    onChange(quantity);
   }
 
-  function handleMinus(cartId: number, quantity: number) {
-    const updatedCart = cart?.map((item) => {
+  function handleUpdate(cartId: number, quantity: number) {
+    if (!cart) {
+      return;
+    }
+    const updatedCart = cart.map((item) => {
       if (item.cartId === cartId) {
         item.quantity = quantity;
         return item;
@@ -64,6 +75,12 @@ export function ViewCart() {
       }
     });
     setCart(updatedCart);
+
+    let q = 0;
+    for (let i = 0; i < updatedCart.length; i++) {
+      q += updatedCart[i].quantity;
+    }
+    onChange(q);
   }
 
   return (
@@ -90,11 +107,11 @@ export function ViewCart() {
           <div className="cart-row">
             <div className=" white info">
               {cart?.map((product) => (
-                <div key={product.productId}>
+                <div key={product.cartId}>
                   <CartCard
                     cartProduct={product}
                     onRemove={handleRemove}
-                    onUpdate={handleMinus}
+                    onUpdate={handleUpdate}
                   />
                 </div>
               ))}
@@ -131,19 +148,20 @@ export function CartCard({ cartProduct, onRemove, onUpdate }: CardProps) {
         onUpdate(cartProduct.cartId, newQuantity);
       }
     } catch (error) {
+      console.log(error);
       alert('Error adding products');
     }
   }
   async function handleMinus() {
     try {
       const newQuantity = quantity - 1;
-      await updateCart(cartProduct.cartId, newQuantity);
+
       if (newQuantity > 0) {
+        await updateCart(cartProduct.cartId, newQuantity);
         setQuantity(newQuantity);
         onUpdate(cartProduct.cartId, newQuantity);
-      }
-      if (newQuantity === 0) {
-        onRemove(cartProduct.cartId);
+      } else {
+        await handleRemove();
       }
     } catch (error) {
       alert('Error removing products');
