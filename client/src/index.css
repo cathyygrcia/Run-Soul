@@ -437,11 +437,6 @@ img {
   .display {
     width: 700px;
   }
-
-  /*
-  .ul {
-    display: none;
-  } */
 }
 
 @media screen and (width <= 1000px) {
