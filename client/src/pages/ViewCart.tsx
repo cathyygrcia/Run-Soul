@@ -13,7 +13,10 @@ export function ViewCart({ onChange }: Props) {
   const [error, setError] = useState<unknown>();
   const [cart, setCart] = useState<CartProduct[]>();
   const navigate = useNavigate();
-
+  const subtotal = cart?.reduce(
+    (total, product) => total + product.quantity * product.price,
+    0
+  );
   useEffect(() => {
     async function loadFetchCart() {
       try {
@@ -85,7 +88,7 @@ export function ViewCart({ onChange }: Props) {
 
   return (
     <>
-      <div className="blue mb-20">
+      <div className="mb-20">
         <h1 className="ml-20 text-4xl white p-5">Your Cart</h1>
       </div>
 
@@ -118,13 +121,20 @@ export function ViewCart({ onChange }: Props) {
             </div>
           </div>
         </div>
-        <div className="checkout-row justify-end">
-          <Link to="/checkout">
-            <div className="checkout-border">
+      </div>
+
+      <div className="checkout-row-subtotal">
+        <p className="white subtotal-text">Subtotal ${subtotal}</p>
+      </div>
+
+      <div className="checkout-row">
+        <Link to="/checkout">
+          <div className="checkout-border">
+            <div>
               <button className="checkout-button">Checkout</button>
             </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
       </div>
     </>
   );

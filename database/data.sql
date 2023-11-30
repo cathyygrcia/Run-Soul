@@ -252,10 +252,6 @@ values
 ),
 (
   1,
-  '/images/nikevaporfly3.png'
-),
-(
-  1,
   '/images/nikevaporfly4.png'
 ),
 (
@@ -265,10 +261,6 @@ values
 (
   2,
   '/images/hokamach2.png'
-),
-(
-  2,
-  '/images/hokamach3.png'
 ),
 (
   2,
@@ -284,10 +276,6 @@ values
 ),
 (
   3,
-  '/images/cloudmonsters3.png'
-),
-(
-  3,
   '/images/cloudmonsters4.png'
 ),
 (
@@ -300,19 +288,11 @@ values
 ),
 (
   4,
-  '/images/asics3.png'
-),
-(
-  4,
   '/images/asics4.png'
 ),
 (
   5,
   '/images/mensnike1.png'
-),
-(
-  5,
-  '/images/mensnike2.png'
 ),
 (
   5,
@@ -325,10 +305,6 @@ values
 (
   6,
   '/images/menshoka1.png'
-),
-(
-  6,
-  '/images/menshoka2.png'
 ),
 (
   6,
@@ -345,10 +321,6 @@ values
 (
   7,
   '/images/menson2.png'
-),
-(
-  7,
-  '/images/menson3.png'
 ),
 (
   7,
@@ -376,10 +348,6 @@ values
 ),
 (
   9,
-  '/images/kidsnike2.png'
-),
-(
-  9,
   '/images/kidsnike3.png'
 ),
 (
@@ -392,10 +360,6 @@ values
 ),
 (
   10,
-  '/images/kidshoka2.png'
-),
-(
-  10,
   '/images/kidshoka3.png'
 ),
 (
@@ -405,10 +369,6 @@ values
 (
   11,
   '/images/kidson1.png'
-),
-(
-  11,
-  '/images/kidson2.png'
 ),
 (
   11,
@@ -447,16 +407,8 @@ values
   '/images/nike3.png'
 ),
 (
-  13,
-  '/images/nike4.png'
-),
-(
   14,
   '/images/hoka1.png'
-),
-(
-  14,
-  '/images/hoka2.png'
 ),
 (
   14,
@@ -478,18 +430,12 @@ values
   15,
   '/images/asicsf3.png'
 ),
-(
-  15,
-  '/images/asicsf4.png'
-),
+
 (
   16,
   '/images/on1.png'
 ),
-(
-  16,
-  '/images/on2.png'
-),
+
 (
   16,
   '/images/on3.png'
