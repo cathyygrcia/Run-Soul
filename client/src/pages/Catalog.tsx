@@ -14,7 +14,7 @@ export function Catalog({ text, categoryId, search, featured }: Props) {
   const [products, setProducts] = useState<Product[]>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<unknown>();
-  console.log('search:', search);
+
   useEffect(() => {
     async function fetchData() {
       const url = featured ? '/api/featured' : `/api/products/${categoryId}`;
@@ -61,7 +61,7 @@ export function Catalog({ text, categoryId, search, featured }: Props) {
         </div>
         <div className="flex flex-wrap justify-center">
           {displayProducts?.map((product) => (
-            <div key={product.productId} className="">
+            <div key={product.productId}>
               <ProductCard product={product} />
             </div>
           ))}

@@ -5,14 +5,15 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   onSearch: (text: string) => void;
+  cartQuantity: number;
 };
 
-export default function Header({ onSearch }: Props) {
+export default function Header({ onSearch, cartQuantity }: Props) {
   return (
     <>
       <div>
-        <nav className="flex bg-goldish p-8 space-x-24 justify-between items-center">
-          <ul className="flex gap-3 text-xl">
+        <nav className="nav">
+          <ul className="ul">
             <li>
               <Link to="/">
                 <FontAwesomeIcon icon={faHouse} />
@@ -43,7 +44,16 @@ export default function Header({ onSearch }: Props) {
               <SearchBar onChange={onSearch} />
             </div>
             <div className="ml-9">
-              <FontAwesomeIcon icon={faCartShopping} size="2x" />
+              <Link to="/cart">
+                <div className="shop">
+                  <FontAwesomeIcon icon={faCartShopping} size="2x" />
+                  {cartQuantity > 0 && (
+                    <div className="circle">
+                      <p>{cartQuantity}</p>
+                    </div>
+                  )}
+                </div>
+              </Link>
             </div>
           </div>
         </nav>{' '}
@@ -58,11 +68,13 @@ type SearchProps = {
 
 function SearchBar({ onChange }: SearchProps) {
   return (
-    <input
-      className="search"
-      type="text"
-      placeholder="search"
-      onChange={(e) => onChange(e.currentTarget.value)}
-    />
+    <>
+      <input
+        className="search-bar"
+        type="text"
+        placeholder="search "
+        onChange={(e) => onChange(e.currentTarget.value)}
+      />
+    </>
   );
 }

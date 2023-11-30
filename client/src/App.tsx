@@ -4,16 +4,40 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 
 import { Catalog } from './pages/Catalog';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductDetails } from './pages/ProductDetails';
+import { ViewCart } from './pages/ViewCart';
+import { EmptyCart } from './pages/EmptyCart';
+import { Checkout } from './pages/Checkout';
+import { fetchCart } from './lib';
 
 export default function App() {
   const [search, setSearch] = useState('');
+  const [cartQuantity, setCartQuantity] = useState(0);
+  useEffect(() => {
+    async function loadFetchCart() {
+      try {
+        const data = await fetchCart();
 
+        let quantity = 0;
+        for (let i = 0; i < data.length; i++) {
+          quantity += data[i].quantity;
+        }
+
+        setCartQuantity(quantity);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    loadFetchCart();
+  }, []);
   return (
     <>
       <Routes>
-        <Route path="/" element={<Header onSearch={setSearch} />}>
+        <Route
+          path="/"
+          element={<Header onSearch={setSearch} cartQuantity={cartQuantity} />}>
           <Route index element={<Homepage search={search} />} />
           <Route
             path="womens"
@@ -33,7 +57,16 @@ export default function App() {
               <Catalog text="Kids Shoes" categoryId={3} search={search} />
             }
           />
-          <Route path="details/:productId" element={<ProductDetails />} />
+          <Route
+            path="details/:productId"
+            element={<ProductDetails onAdd={setCartQuantity} />}
+          />
+          <Route
+            path="cart"
+            element={<ViewCart onChange={setCartQuantity} />}
+          />
+          <Route path="empty" element={<EmptyCart search={search} />} />
+          <Route path="checkout" element={<Checkout />} />
         </Route>
       </Routes>
     </>

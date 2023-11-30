@@ -153,6 +153,103 @@ app.get('/api/productImages/:productId', async (req, res, next) => {
   }
 });
 
+app.post('/api/cart', async (req, res, next) => {
+  try {
+    const { productId, quantity, size } = req.body;
+    const checkCartQuery = `
+      SELECT * FROM "cart"
+      WHERE "productId" = $1 AND "size" = $2
+    `;
+    const checkCartParams = [productId, size];
+    const checkResult = await db.query(checkCartQuery, checkCartParams);
+
+    if (checkResult.rows.length > 0) {
+      const updateCartQuery = `
+        UPDATE "cart"
+        SET "quantity" = "quantity" + $1
+        WHERE "productId" = $2 AND "size" = $3
+        RETURNING *
+      `;
+      const updateCartParams = [quantity, productId, size];
+      const updateResult = await db.query(updateCartQuery, updateCartParams);
+
+      res.json(updateResult.rows[0]);
+    } else {
+      const addToCartQuery = `
+        INSERT INTO "cart" ("productId", "quantity", "size")
+        VALUES ($1, $2, $3)
+        RETURNING *
+      `;
+      const addToCartParams = [productId, quantity, size];
+      const insertResult = await db.query(addToCartQuery, addToCartParams);
+
+      res.json(insertResult.rows[0]);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/cart', async (req, res, next) => {
+  try {
+    const sql = `
+      select "productId",
+            "cartId",
+            "quantity",
+            "cart"."size",
+            "name",
+            "price",
+            "brand",
+            "imageUrl",
+            "products"."categoryId"
+        from "cart"
+        join "products" using ("productId")
+    `;
+    const result = await db.query<Product>(sql);
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.delete('/api/cart/:cartId', async (req, res, next) => {
+  try {
+    const cartId = Number(req.params.cartId);
+
+    const sql = `
+      delete
+        from "cart"
+        where "cartId" = $1
+        returning *;
+    `;
+    const params = [cartId];
+    const result = await db.query<Product>(sql, params);
+    res.json(result.rows[0]);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.put('/api/cart/:cartId', async (req, res, next) => {
+  try {
+    const cartId = Number(req.params.cartId);
+    const { quantity } = req.body;
+    const sql = `
+      update "cart"
+        set
+          "quantity" = $1
+        where "cartId" = $2
+        returning *;
+    `;
+    const params = [quantity, cartId];
+    const result = await db.query<Product>(sql, params);
+    res.json(result.rows[0]);
+  } catch (err) {
+    next(err);
+  }
+});
+
 /**
  * Serves React's index.html if no api route matches.
  *

@@ -241,13 +241,14 @@ insert into "images"(
   "productId",
   "imageUrl"
 )
-values(
+values
+(
   1,
-  '/images/nikevaporfly2.png'
+  '/images/nikevaporfly1.png'
 ),
 (
   1,
-  '/images/nikevaporfly3.png'
+  '/images/nikevaporfly2.png'
 ),
 (
   1,
@@ -255,11 +256,11 @@ values(
 ),
 (
   2,
-  '/images/hokamach2.png'
+  '/images/hokamach1.png'
 ),
 (
   2,
-  '/images/hokamach3.png'
+  '/images/hokamach2.png'
 ),
 (
   2,
@@ -267,11 +268,11 @@ values(
 ),
 (
   3,
-  '/images/cloudmonsters2.png'
+  '/images/cloudmonsters1.png'
 ),
 (
   3,
-  '/images/cloudmonsters3.png'
+  '/images/cloudmonsters2.png'
 ),
 (
   3,
@@ -279,11 +280,11 @@ values(
 ),
 (
   4,
-  '/images/asics2.png'
+  '/images/asics1.png'
 ),
 (
   4,
-  '/images/asics3.png'
+  '/images/asics2.png'
 ),
 (
   4,
@@ -291,7 +292,7 @@ values(
 ),
 (
   5,
-  '/images/mensnike2.png'
+  '/images/mensnike1.png'
 ),
 (
   5,
@@ -303,7 +304,7 @@ values(
 ),
 (
   6,
-  '/images/menshoka2.png'
+  '/images/menshoka1.png'
 ),
 (
   6,
@@ -315,15 +316,19 @@ values(
 ),
 (
   7,
+  '/images/menson1.png'
+),
+(
+  7,
   '/images/menson2.png'
 ),
 (
   7,
-  '/images/menson3.png'
+  '/images/menson4.png'
 ),
 (
-  7,
-  '/images/menson4.png'
+  8,
+  '/images/mensasics1.png'
 ),
 (
   8,
@@ -339,7 +344,7 @@ values(
 ),
 (
   9,
-  '/images/kidsnike2.png'
+  '/images/kidsnike1.png'
 ),
 (
   9,
@@ -351,7 +356,7 @@ values(
 ),
 (
   10,
-  '/images/kidshoka2.png'
+  '/images/kidshoka1.png'
 ),
 (
   10,
@@ -363,7 +368,7 @@ values(
 ),
 (
   11,
-  '/images/kidson2.png'
+  '/images/kidson1.png'
 ),
 (
   11,
@@ -372,6 +377,10 @@ values(
 (
   11,
   '/images/kidson4.png'
+),
+(
+  12,
+  '/images/kidsasics1.png'
 ),
 (
   12,
@@ -391,15 +400,15 @@ values(
 ),
 (
   13,
-  '/images/nike3.png'
+  '/images/nike2.png'
 ),
 (
   13,
-  '/images/nike4.png'
+  '/images/nike3.png'
 ),
 (
   14,
-  '/images/hoka2.png'
+  '/images/hoka1.png'
 ),
 (
   14,
@@ -411,20 +420,22 @@ values(
 ),
 (
   15,
+  '/images/asicsf1.png'
+),
+(
+  15,
   '/images/asicsf2.png'
 ),
 (
   15,
   '/images/asicsf3.png'
 ),
-(
-  15,
-  '/images/asicsf4.png'
-),
+
 (
   16,
-  '/images/on2.png'
+  '/images/on1.png'
 ),
+
 (
   16,
   '/images/on3.png'
@@ -432,4 +443,20 @@ values(
 (
   16,
   '/images/on4.png'
+),
+(
+  17,
+  '/images/speedgoat1.png'
+),
+(
+  17,
+  '/images/speedgoat2.png'
+),
+(
+  17,
+  '/images/speedgoat3.png'
+),
+(
+  17,
+  '/images/speedgoat4.png'
 );

@@ -12,6 +12,22 @@ export type Product = {
 export type Image = {
   productId: number;
   imageUrl: string;
+  imagesId: number;
+};
+
+export type CartItem = {
+  cartId: number;
+  quantity: number;
+  size: number;
+  productId: number;
+};
+
+export type CartProduct = Product & CartItem;
+
+export const categoryNames = {
+  1: 'Mens',
+  2: 'Womens',
+  3: 'Kids',
 };
 
 /**
@@ -39,6 +55,61 @@ export async function fetchProduct(productId: number): Promise<Product> {
 
 export async function fetchImages(productId: number): Promise<Image[]> {
   const res = await fetch(`/api/productimages/${productId}`);
+  if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+  return await res.json();
+}
+
+export async function fetchCart(): Promise<CartProduct[]> {
+  const res = await fetch('/api/cart');
+  if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+  return await res.json();
+}
+
+export async function addToCart(productId: number, size: number) {
+  const requestBody = JSON.stringify({ productId, size, quantity: 1 });
+
+  const res = await fetch('/api/cart', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: requestBody,
+  });
+
+  if (!res.ok) {
+    throw new Error(`fetch Error ${res.status}`);
+  }
+
+  return await res.json();
+}
+
+export async function removeFromCart(cartId: number): Promise<void> {
+  const req = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const res = await fetch(`/api/cart/${cartId}`, req);
+
+  if (!res.ok) {
+    throw new Error(`Fetch Error ${res.status}`);
+  }
+}
+
+export async function updateCart(
+  cartId: number,
+  quantity: number
+): Promise<CartItem> {
+  const req = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ quantity }),
+  };
+  const res = await fetch(`/api/cart/${cartId}`, req);
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
   return await res.json();
 }
