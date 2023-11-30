@@ -31,7 +31,7 @@ export function ProductDetails({ onAdd }: Props) {
 
   function renderPhotos() {
     return images?.map((image, index) => (
-      <div className="product-img hover:transform hover:scale-95 transition-transform duration-300 ease-out-in margin">
+      <div className="product-img hover:transform hover:scale-95 transition-transform duration-300 ease-out-in">
         <img
           key={image.imagesId}
           src={image.imageUrl}

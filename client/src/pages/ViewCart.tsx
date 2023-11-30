@@ -85,7 +85,7 @@ export function ViewCart({ onChange }: Props) {
 
   return (
     <>
-      <div className="blue">
+      <div className="blue mb-20">
         <h1 className="ml-20 text-4xl white p-5">Your Cart</h1>
       </div>
 
@@ -120,7 +120,7 @@ export function ViewCart({ onChange }: Props) {
         </div>
         <div className="checkout-row justify-end">
           <Link to="/checkout">
-            <div>
+            <div className="checkout-border">
               <button className="checkout-button">Checkout</button>
             </div>
           </Link>

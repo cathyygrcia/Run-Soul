@@ -24,6 +24,8 @@ input::placeholder {
 
 img {
   width: 100%;
+  height: 100%;
+  object-fit: scale-down;
 }
 
 .nav {
@@ -265,8 +267,7 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  /* border: solid yellow; */
+  border: solid gray 1px;
 }
 
 .cart-row1 {
@@ -280,6 +281,7 @@ img {
   width: 1500px;
   margin: 0 auto;
   display: flex;
+  border-bottom: solid gray 0.5px;
 }
 
 .checkout-row {
@@ -335,6 +337,12 @@ img {
   padding: 1rem;
   color: white;
   width: 200px;
+}
+
+.checkout-border {
+  width: 500px;
+  display: flex;
+  justify-content: end;
 }
 
 .circle {
