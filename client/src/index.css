@@ -439,7 +439,7 @@ img {
   }
 }
 
-@media screen and (width <= 1000px) {
+/* @media screen and (width <= 1000px) {
   :root {
     width: 1000px;
   }
@@ -482,10 +482,9 @@ img {
 
   .display {
     width: 700px;
-  }
+  } */
 
-  /*
+/*
   .ul {
     display: none;
   } */
-}
