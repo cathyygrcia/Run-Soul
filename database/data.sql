@@ -241,7 +241,12 @@ insert into "images"(
   "productId",
   "imageUrl"
 )
-values(
+values
+(
+  1,
+  '/images/nikevaporfly1.png'
+),
+(
   1,
   '/images/nikevaporfly2.png'
 ),
@@ -252,6 +257,10 @@ values(
 (
   1,
   '/images/nikevaporfly4.png'
+),
+(
+  2,
+  '/images/hokamach1.png'
 ),
 (
   2,
@@ -267,6 +276,10 @@ values(
 ),
 (
   3,
+  '/images/cloudmonsters1.png'
+),
+(
+  3,
   '/images/cloudmonsters2.png'
 ),
 (
@@ -276,6 +289,10 @@ values(
 (
   3,
   '/images/cloudmonsters4.png'
+),
+(
+  4,
+  '/images/asics1.png'
 ),
 (
   4,
@@ -291,6 +308,10 @@ values(
 ),
 (
   5,
+  '/images/mensnike1.png'
+),
+(
+  5,
   '/images/mensnike2.png'
 ),
 (
@@ -300,6 +321,10 @@ values(
 (
   5,
   '/images/mensnike4.png'
+),
+(
+  6,
+  '/images/menshoka1.png'
 ),
 (
   6,
@@ -315,6 +340,10 @@ values(
 ),
 (
   7,
+  '/images/menson1.png'
+),
+(
+  7,
   '/images/menson2.png'
 ),
 (
@@ -324,6 +353,10 @@ values(
 (
   7,
   '/images/menson4.png'
+),
+(
+  8,
+  '/images/mensasics1.png'
 ),
 (
   8,
@@ -339,6 +372,10 @@ values(
 ),
 (
   9,
+  '/images/kidsnike1.png'
+),
+(
+  9,
   '/images/kidsnike2.png'
 ),
 (
@@ -348,6 +385,10 @@ values(
 (
   9,
   '/images/kidsnike4.png'
+),
+(
+  10,
+  '/images/kidshoka1.png'
 ),
 (
   10,
@@ -363,6 +404,10 @@ values(
 ),
 (
   11,
+  '/images/kidson1.png'
+),
+(
+  11,
   '/images/kidson2.png'
 ),
 (
@@ -372,6 +417,10 @@ values(
 (
   11,
   '/images/kidson4.png'
+),
+(
+  12,
+  '/images/kidsasics1.png'
 ),
 (
   12,
@@ -391,11 +440,19 @@ values(
 ),
 (
   13,
+  '/images/nike2.png'
+),
+(
+  13,
   '/images/nike3.png'
 ),
 (
   13,
   '/images/nike4.png'
+),
+(
+  14,
+  '/images/hoka1.png'
 ),
 (
   14,
@@ -411,6 +468,10 @@ values(
 ),
 (
   15,
+  '/images/asicsf1.png'
+),
+(
+  15,
   '/images/asicsf2.png'
 ),
 (
@@ -423,6 +484,10 @@ values(
 ),
 (
   16,
+  '/images/on1.png'
+),
+(
+  16,
   '/images/on2.png'
 ),
 (
@@ -432,6 +497,10 @@ values(
 (
   16,
   '/images/on4.png'
+),
+(
+  17,
+  '/images/speedgoat1.png'
 ),
 (
   17,

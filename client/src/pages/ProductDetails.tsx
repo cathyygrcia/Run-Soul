@@ -23,22 +23,24 @@ export function ProductDetails({ onAdd }: Props) {
   const [error, setError] = useState<unknown>();
   const [images, setImages] = useState<Image[]>();
   const [size, setSize] = useState<number>();
-  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // function handlePhotoClick(index) {
-  //   setCurrentImageIndex(index);
-  // }
+  function handlePhotoClick(index) {
+    setCurrentImageIndex(index);
+  }
 
-  // function renderPhotos() {
-  //   return images?.map((image, index) => (
-  //     <img
-  //       key={image.imageUrl}
-  //       src={image.imageUrl}
-  //       alt={`Mini ${index}`}
-  //       onClick={() => handlePhotoClick(index)}
-  //     />
-  //   ));
-  // }
+  function renderPhotos() {
+    return images?.map((image, index) => (
+      <div className="product-img hover:transform hover:scale-95 transition-transform duration-300 ease-out-in margin">
+        <img
+          key={image.imagesId}
+          src={image.imageUrl}
+          alt={`Mini ${index}`}
+          onMouseOver={() => handlePhotoClick(index)}
+        />
+      </div>
+    ));
+  }
 
   async function handleAddToCart() {
     try {
@@ -106,19 +108,11 @@ export function ProductDetails({ onAdd }: Props) {
       <div className="product-details-container">
         <div className="image-container">
           <div className="images-row">
-            <div className="mini-images ">
-              {images.map((image) => (
-                <div
-                  className="product-img hover:transform hover:scale-95 transition-transform duration-300 ease-out-in margin"
-                  key={image.imagesId}>
-                  <img src={image.imageUrl} className="" />
-                </div>
-              ))}
-            </div>
+            <div className="mini-images ">{renderPhotos()}</div>
           </div>
           <div className="images-row flex flex-col items-center">
             <div className="hero flex justify-center items-center">
-              <img src={imageUrl} />
+              <img src={images?.[currentImageIndex]?.imageUrl || imageUrl} />
             </div>
           </div>
         </div>
