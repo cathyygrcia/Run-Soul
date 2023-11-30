@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { CartProduct, removeFromCart, updateCart, fetchCart } from '../lib';
+import {
+  CartProduct,
+  removeFromCart,
+  updateCart,
+  fetchCart,
+  categoryNames,
+} from '../lib';
 
 type Props = {
   onChange: (quantity: number) => void;
@@ -195,7 +201,7 @@ export function CartCard({ cartProduct, onRemove, onUpdate }: CardProps) {
           <img src={imageUrl} />
         </div>
         <div className="checkout-details">
-          <p>Category</p>
+          <p>{categoryNames[cartProduct.categoryId]}</p>
           <p>{brand}</p>
           <p>{name}</p>
           <p>Size: {size}</p>

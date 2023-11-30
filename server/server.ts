@@ -200,7 +200,8 @@ app.get('/api/cart', async (req, res, next) => {
             "name",
             "price",
             "brand",
-            "imageUrl"
+            "imageUrl",
+            "products"."categoryId"
         from "cart"
         join "products" using ("productId")
     `;

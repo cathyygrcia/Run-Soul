@@ -47,9 +47,11 @@ export default function Header({ onSearch, cartQuantity }: Props) {
               <Link to="/cart">
                 <div className="shop">
                   <FontAwesomeIcon icon={faCartShopping} size="2x" />
-                  <div className="circle">
-                    <p>{cartQuantity}</p>
-                  </div>
+                  {cartQuantity > 0 && (
+                    <div className="circle">
+                      <p>{cartQuantity}</p>
+                    </div>
+                  )}
                 </div>
               </Link>
             </div>

@@ -24,6 +24,12 @@ export type CartItem = {
 
 export type CartProduct = Product & CartItem;
 
+export const categoryNames = {
+  1: 'Mens',
+  2: 'Womens',
+  3: 'Kids',
+};
+
 /**
  * Fetches all products from the API.
  * @returns Promise that resolves to an array of products.

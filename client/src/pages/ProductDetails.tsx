@@ -7,7 +7,7 @@ import {
   addToCart,
   fetchCart,
 } from '../lib';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 type Props = {
@@ -101,10 +101,9 @@ export function ProductDetails({ onAdd }: Props) {
 
   return (
     <>
-      <Link to="/">
-        {/* TODO: Instead of a div, the above should link to `/` */}
-        <button className="back-button white"> &lt; Back</button>
-      </Link>
+      {/* TODO: Instead of a div, the above should link to `/` */}
+      <div className="back-button white"></div>
+
       <div className="product-details-container">
         <div className="image-container">
           <div className="images-row">

@@ -414,6 +414,10 @@ img {
     width: 500px;
   }
 
+  .cart-container {
+    width: auto;
+  }
+
   .mini-images {
     flex-direction: row;
   }
@@ -451,6 +455,10 @@ img {
 
   .product-details-container {
     flex-direction: column;
+  }
+
+  .cart-container {
+    width: auto;
   }
 
   .cart-row {
