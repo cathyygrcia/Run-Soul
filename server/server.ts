@@ -153,6 +153,8 @@ app.get('/api/productImages/:productId', async (req, res, next) => {
   }
 });
 
+// express code that inserts into the data base.
+
 app.post('/api/cart', async (req, res, next) => {
   try {
     const { productId, quantity, size } = req.body;
@@ -226,6 +228,46 @@ app.delete('/api/cart/:cartId', async (req, res, next) => {
     const result = await db.query<Product>(sql, params);
     res.json(result.rows[0]);
     res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// app.delete('/api/cart/all', async (req, res, next) => {
+//   try {
+//     console.log('hello');
+//     const { productIds, cartId } = req.body;
+
+//     for (let i = 0; i < productIds.length; i++) {
+//       const sql = `
+//       delete
+//         from "cart"
+//         where "productId" = $1
+//         and "cartId" = $2
+//         returning *;
+//     `;
+//       const params = [productIds, cartId];
+//       const result = await db.query<Product>(sql, params);
+//       res.sendStatus(204);
+//     }
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+app.delete('/api/cart/all/:cartId', async (req, res, next) => {
+  try {
+    const cartId = Number(req.params.cartId);
+    console.log(cartId);
+    const sql = `
+      delete
+        from "cart"
+        where "cartId" = $1
+        returning *;
+    `;
+    const result = await db.query<Product>(sql, [cartId]);
+
+    res.json(result.rows);
   } catch (err) {
     next(err);
   }

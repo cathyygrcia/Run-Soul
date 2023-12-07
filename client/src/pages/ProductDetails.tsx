@@ -53,6 +53,7 @@ export function ProductDetails({ onAdd }: Props) {
 
       setIsLoading(true);
       if (productId && size) {
+        //addToCart
         await addToCart(+productId, size);
         onAdd(quantity + 1);
       }

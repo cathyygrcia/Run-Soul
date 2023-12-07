@@ -63,7 +63,12 @@ export default function App() {
           />
           <Route
             path="cart"
-            element={<ViewCart onChange={setCartQuantity} />}
+            element={
+              <ViewCart
+                onChange={setCartQuantity}
+                onRemove={() => setCartQuantity(0)}
+              />
+            }
           />
           <Route path="empty" element={<EmptyCart search={search} />} />
           <Route path="checkout" element={<Checkout />} />
