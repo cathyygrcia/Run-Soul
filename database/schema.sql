@@ -37,7 +37,7 @@ CREATE TABLE "cart" (
   "cartId" serial PRIMARY KEY,
   "quantity" int,
   "productId" int,
-  "size" int
+  "size" float
 );
 
 CREATE TABLE "images" (

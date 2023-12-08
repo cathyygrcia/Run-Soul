@@ -65,6 +65,7 @@ export async function fetchCart(): Promise<CartProduct[]> {
   return await res.json();
 }
 
+//fetch call for addToCart to server
 export async function addToCart(productId: number, size: number) {
   const requestBody = JSON.stringify({ productId, size, quantity: 1 });
 
@@ -96,6 +97,21 @@ export async function removeFromCart(cartId: number): Promise<void> {
   if (!res.ok) {
     throw new Error(`Fetch Error ${res.status}`);
   }
+}
+
+export async function removeAll(cartId: number): Promise<void> {
+  const req = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const res = await fetch(`/api/cart/all/${cartId}`, req);
+
+  if (!res.ok) {
+    throw new Error(`Fetch Error ${res.status}`);
+  }
+  return await res.json();
 }
 
 export async function updateCart(

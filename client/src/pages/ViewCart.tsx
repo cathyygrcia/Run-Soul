@@ -8,13 +8,15 @@ import {
   updateCart,
   fetchCart,
   categoryNames,
+  removeAll,
 } from '../lib';
 
 type Props = {
   onChange: (quantity: number) => void;
+  onRemove: () => void;
 };
 
-export function ViewCart({ onChange }: Props) {
+export function ViewCart({ onChange, onRemove }: Props) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<unknown>();
   const [cart, setCart] = useState<CartProduct[]>();
@@ -69,6 +71,17 @@ export function ViewCart({ onChange }: Props) {
       quantity += updatedCart[i].quantity;
     }
     onChange(quantity);
+  }
+
+  async function handleRemoveAll(cartId: number) {
+    try {
+      console.log('hi');
+      await removeAll(cartId);
+      setCart([]);
+      onRemove();
+    } catch (error) {
+      setError(error);
+    }
   }
 
   function handleUpdate(cartId: number, quantity: number) {
@@ -137,7 +150,11 @@ export function ViewCart({ onChange }: Props) {
         <Link to="/checkout">
           <div className="checkout-border">
             <div>
-              <button className="checkout-button">Checkout</button>
+              <button
+                className="checkout-button"
+                onClick={() => handleRemoveAll(cart[0].cartId)}>
+                Checkout
+              </button>
             </div>
           </div>
         </Link>
