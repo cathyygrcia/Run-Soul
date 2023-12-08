@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 * {
   font-family: 'Lexend Exa', sans-serif;
 }
@@ -439,7 +435,7 @@ img {
   }
 }
 
-/* @media screen and (width <= 1000px) {
+@media screen and (width <= 1000px) {
   :root {
     width: 1000px;
   }
@@ -484,5 +480,7 @@ img {
     width: 700px;
   }
 
-
-*/
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+}
