@@ -262,10 +262,11 @@ app.delete('/api/cart/all/:cartId', async (req, res, next) => {
     const sql = `
       delete
         from "cart"
-        where "cartId" = $1
+        where "cartId" > $1
         returning *;
     `;
-    const result = await db.query<Product>(sql, [cartId]);
+    const params = [0];
+    const result = await db.query<Product>(sql, params);
 
     res.json(result.rows);
   } catch (err) {

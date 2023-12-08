@@ -75,7 +75,6 @@ export function ViewCart({ onChange, onRemove }: Props) {
 
   async function handleRemoveAll(cartId: number) {
     try {
-      console.log('hi');
       await removeAll(cartId);
       setCart([]);
       onRemove();
