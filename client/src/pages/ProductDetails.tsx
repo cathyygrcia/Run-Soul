@@ -105,7 +105,7 @@ export function ProductDetails({ onAdd }: Props) {
       {/* TODO: Instead of a div, the above should link to `/` */}
       <div className="back-button white"></div>
 
-      <div className="product-details-container">
+      <div className="product-details-container ">
         <div className="image-container">
           <div className="images-row">
             <div className="mini-images ">{renderPhotos()}</div>
