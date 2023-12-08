@@ -110,7 +110,7 @@ export function ViewCart({ onChange, onRemove }: Props) {
         <h1 className="ml-20 text-4xl white p-5">Your Cart</h1>
       </div>
 
-      <div className="cart-container">
+      <div className="cart-container ">
         <div className="cart-row1">
           <div className=" white info">
             <p>Product</p>
