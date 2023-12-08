@@ -11,54 +11,56 @@ type Props = {
 export default function Header({ onSearch, cartQuantity }: Props) {
   return (
     <>
-      <div>
-        <nav className="nav">
-          <ul className="ul">
-            <li>
-              <Link to="/">
-                <FontAwesomeIcon icon={faHouse} />
-              </Link>
-            </li>
-            <li>
-              <Link to="mens">Mens</Link>
-            </li>
-            <li>
-              <Link to="womens">Womens</Link>
-            </li>
-            <li>
-              <Link to="kids">Kids</Link>
-            </li>
-          </ul>
-          <div>
+      <nav className="nav">
+        <ul className="ul">
+          <li>
             <Link to="/">
-              <div>
-                <h1 className="text-5xl text-black">Run</h1>
-              </div>
-              <div className="">
-                <h1 className="text-5xl pl-20 text-black">Soul</h1>
+              <FontAwesomeIcon icon={faHouse} />
+            </Link>
+          </li>
+          <li>
+            <Link to="mens">Mens</Link>
+          </li>
+          <li>
+            <Link to="womens">Womens</Link>
+          </li>
+          <li>
+            <Link to="kids">Kids</Link>
+          </li>
+        </ul>
+        <div>
+          <Link to="/">
+            <div>
+              <h1 className="text-lg md:text-2xl lg:text-5xl text-black">
+                Run
+              </h1>
+            </div>
+            <div className="">
+              <h1 className="text-lg md:text-2xl lg:text-5xl pl-20 text-black">
+                Soul
+              </h1>
+            </div>
+          </Link>
+        </div>
+        <div className="flex">
+          <div>
+            <SearchBar onChange={onSearch} />
+          </div>
+          <div className="ml-9">
+            <Link to="/cart">
+              <div className="shop">
+                <FontAwesomeIcon icon={faCartShopping} size="2x" />
+                {cartQuantity > 0 && (
+                  <div className="circle">
+                    <p>{cartQuantity}</p>
+                  </div>
+                )}
               </div>
             </Link>
           </div>
-          <div className="flex">
-            <div>
-              <SearchBar onChange={onSearch} />
-            </div>
-            <div className="ml-9">
-              <Link to="/cart">
-                <div className="shop">
-                  <FontAwesomeIcon icon={faCartShopping} size="2x" />
-                  {cartQuantity > 0 && (
-                    <div className="circle">
-                      <p>{cartQuantity}</p>
-                    </div>
-                  )}
-                </div>
-              </Link>
-            </div>
-          </div>
-        </nav>{' '}
-        <Outlet />
-      </div>
+        </div>
+      </nav>{' '}
+      <Outlet />
     </>
   );
 }
