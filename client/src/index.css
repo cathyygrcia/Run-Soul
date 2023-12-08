@@ -393,7 +393,7 @@ img {
   font-size: 24px;
 }
 
-@media screen and (width <= 500px) {
+/* @media screen and (width <= 500px) {
   :root {
     width: 1000px;
   }
@@ -433,7 +433,7 @@ img {
   .display {
     width: 700px;
   }
-}
+} */
 
 @media screen and (width <= 1000px) {
   :root {
