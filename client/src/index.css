@@ -435,7 +435,7 @@ img {
   }
 } */
 
-@media screen and (width <= 1000px) {
+@media screen and (width <= 1500px) {
   :root {
     width: 1000px;
   }
