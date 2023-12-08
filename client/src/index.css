@@ -435,9 +435,9 @@ img {
   }
 } */
 
-@media screen and (width <= 1500px) {
+@media screen and (width <= 500px) {
   :root {
-    width: 1000px;
+    width: 100%;
   }
 
   .hidden {
