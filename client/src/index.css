@@ -397,6 +397,7 @@ img {
   font-size: 24px;
 }
 
+/*
 @media screen and (width <= 768px) {
   :root {
     width: 1000px;
@@ -484,7 +485,4 @@ img {
     width: 700px;
   } */
 
-/*
-  .ul {
-    display: none;
-  } */
+
