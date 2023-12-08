@@ -435,7 +435,7 @@ img {
   }
 } */
 
-@media screen and (width <= 1500px) {
+/* @media screen and (width <= 1500px) {
   :root {
     width: 1000px;
   }
@@ -479,7 +479,7 @@ img {
   .display {
     width: 700px;
   }
-}
+} */
 
 @tailwind base;
 @tailwind components;
