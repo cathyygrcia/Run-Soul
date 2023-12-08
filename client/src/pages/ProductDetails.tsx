@@ -111,7 +111,7 @@ export function ProductDetails({ onAdd }: Props) {
             <div className="mini-images ">{renderPhotos()}</div>
           </div>
           <div className="images-row flex flex-col items-center">
-            <div className="hero flex justify-center items-center">
+            <div className="hero flex justify-center items-center w-[160px] h-[160px] md:w-[320px] md:h-[320px] lg:w-[550px] lg:h-[550px]">
               <img src={images?.[currentImageIndex]?.imageUrl || imageUrl} />
             </div>
           </div>

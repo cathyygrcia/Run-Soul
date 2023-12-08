@@ -4,6 +4,7 @@
 
 :root {
   background-color: #202c39;
+  width: 100%;
 }
 
 li {
@@ -135,8 +136,6 @@ img {
 }
 
 .hero {
-  width: 550px;
-  height: 550px;
   background-color: #d9d9d9;
   border-radius: 10px;
   margin-bottom: 1rem;
@@ -173,6 +172,7 @@ img {
 
 .product-details-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -435,9 +435,13 @@ img {
   }
 } */
 
+.hide {
+  display: none;
+}
+
 @media screen and (width <= 500px) {
   :root {
-    width: 100%;
+    width: 1000px;
   }
 
   .hidden {
