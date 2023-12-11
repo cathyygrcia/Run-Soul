@@ -124,19 +124,17 @@ export function ViewCart({ onChange, onRemove }: Props) {
           </div>
         </div>
 
-        <div>
-          <div className="cart-row">
-            <div className=" white info">
-              {cart?.map((product) => (
-                <div key={product.cartId}>
-                  <CartCard
-                    cartProduct={product}
-                    onRemove={handleRemove}
-                    onUpdate={handleUpdate}
-                  />
-                </div>
-              ))}
-            </div>
+        <div className="cart-row">
+          <div className="white checkout-details">
+            {cart?.map((product) => (
+              <div key={product.cartId}>
+                <CartCard
+                  cartProduct={product}
+                  onRemove={handleRemove}
+                  onUpdate={handleUpdate}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
