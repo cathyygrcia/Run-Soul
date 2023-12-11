@@ -31,9 +31,10 @@ export function ProductDetails({ onAdd }: Props) {
 
   function renderPhotos() {
     return images?.map((image, index) => (
-      <div className="product-img hover:transform hover:scale-95 transition-transform duration-300 ease-out-in">
+      <div
+        key={image.imagesId}
+        className="product-img hover:transform hover:scale-95 transition-transform duration-300 ease-out-in">
         <img
-          key={image.imagesId}
           src={image.imageUrl}
           alt={`Mini ${index}`}
           onMouseOver={() => handlePhotoClick(index)}
